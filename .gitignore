@@ -1,7 +1,7 @@
 #################
 ## Netbeans
 #################
-
+*/target/**
 nbproject/private/
 build/
 nbbuild/
