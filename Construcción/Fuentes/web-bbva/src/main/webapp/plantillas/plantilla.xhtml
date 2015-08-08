@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>EFYCAP</title>
+
+        <h:outputStylesheet library="css" name="fonts.css" />
+        <h:outputStylesheet library="css" name="primefaces.css" />
+        <h:outputStylesheet library="css" name="theme.css" />
+        <h:outputStylesheet library="css" name="principal.css" />
+        <h:outputStylesheet library="css" name="efycap.css" />
+
+
+        <script type="text/javascript">
+        </script>
+
+        <ui:insert name="cabecera" />
+
+    </h:head>
+    <h:body>
+        <div id="pagina">
+
+            <div id="top">
+
+                <div id="banner">
+
+                    <form id="formDeslogueo" name="formDeslogueo" method="post"
+                          action="/pkmslogout"></form>
+
+                    <h:panelGrid columns="2" style="width:100%" cellpadding="0"
+                                 cellspacing="0">
+                        <h:graphicImage library="images" name="logo-bbva.png" />
+                        <h:panelGrid columns="1" style="width:100%">
+                            <h:panelGrid styleClass="sesion" columns="3"
+                                         style="width:auto;margin-bottom: 10px; margin-top: -10px;">
+                                <h:outputText
+                                    value="#{usuarioMB.usuario.nombre} #{usuarioMB.usuario.apellidoPaterno} #{usuarioMB.usuario.apellidoMaterno}" />
+                                <h:form style="height: 21px;" id="frmDesconectar">
+                                    <p:commandButton id="btnCerrarSesion"
+                                                     styleClass="user-desconect" title="Cerrar"
+                                                     actionListener="#{usuarioMB.logout}"
+                                                     oncomplete="cerrarVentana()" value="" />
+                                    <!-- 								<h:commandButton title="Desconectar" value="Desconectar" onclick="deslogueo()" type="button"/> -->
+                                </h:form>
+                            </h:panelGrid>
+                            <h:outputText class="producto" value="proyecta" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </div>
+
+                <div id="menubar">
+                    <h:form id="formMenuBar">
+                        <p:menubar id="menuOpc" >
+                            <p:submenu id="opcAdmin" label="Administración" icon="ui-icon-wrench" >
+                                <p:menuitem>
+                                    <h:commandLink value="Parámetros" type="button"
+                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemPar"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                </p:menuitem>
+                            </p:submenu>
+
+                            <p:submenu id="opcProy" label="Proyecciones" icon="ui-icon-gear">
+                                <p:menuitem>
+                                    <h:commandLink value="Nueva" type="button"
+                                                   action="/pages/procesar-rating.jsf?faces-redirect=true"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff"
+                                                   id="itemNue" />
+
+                                </p:menuitem>
+                                <p:menuitem>
+                                    <h:commandLink value="Consultar" type="button"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff"
+                                                   action="/pages/consulta-simulaciones.jsf?faces-redirect=true" id="itemCon" />
+                                </p:menuitem>
+                            </p:submenu>
+                        </p:menubar>
+
+                    </h:form>
+                </div>
+
+            </div>
+
+            <div id="cuerpo">
+                <ui:insert name="contenido" />
+            </div>
+            <div id="pie">
+                <div id="pieEnlaces"></div>
+
+                <div id="pieDerechos">BBVA Continental - Todos los Derechos
+                    Reservados - 2015</div>
+            </div>
+        </div>
+    </h:body>
+</html>
