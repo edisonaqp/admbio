@@ -6,6 +6,8 @@
 package com.bbva.admbio.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,57 +33,116 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Motivo.findAll", query = "SELECT m FROM Motivo m"),
     @NamedQuery(name = "Motivo.findByCdMotivo", query = "SELECT m FROM Motivo m WHERE m.cdMotivo = :cdMotivo"),
     @NamedQuery(name = "Motivo.findByNbMnemo", query = "SELECT m FROM Motivo m WHERE m.nbMnemo = :nbMnemo"),
-    @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion")})
+    @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion"),
+    @NamedQuery(name = "Motivo.findByFhCreacion", query = "SELECT m FROM Motivo m WHERE m.fhCreacion = :fhCreacion"),
+    @NamedQuery(name = "Motivo.findByFhModificacion", query = "SELECT m FROM Motivo m WHERE m.fhModificacion = :fhModificacion"),
+    @NamedQuery(name = "Motivo.findByCdUsuCrea", query = "SELECT m FROM Motivo m WHERE m.cdUsuCrea = :cdUsuCrea"),
+    @NamedQuery(name = "Motivo.findByCdUsuModi", query = "SELECT m FROM Motivo m WHERE m.cdUsuModi = :cdUsuModi"),
+    @NamedQuery(name = "Motivo.findByStEstado", query = "SELECT m FROM Motivo m WHERE m.stEstado = :stEstado")})
 public class Motivo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_MOTIVO")
-    private Integer cdMotivo;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "NB_MNEMO")
-    private String nbMnemo;
+    private String mnemonico;
     @Basic(optional = false)
     @Column(name = "NB_DESCRIPCION")
-    private String nbDescripcion;
-    @OneToMany(mappedBy = "cdMotivo")
+    private String descripcion;
+    @Column(name = "FH_CREACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraCreacion;
+    @Column(name = "FH_MODIFICACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraModificacion;
+    @Column(name = "CD_USU_CREA")
+    private String usuarioCreacion;
+    @Column(name = "CD_USU_MODI")
+    private String usuarioModificacion;
+    @Basic(optional = false)
+    @Column(name = "ST_ESTADO")
+    private BigInteger estado;
+    @OneToMany(mappedBy = "motivo")
     private List<TerminalInactivo> terminalInactivoList;
 
     public Motivo() {
     }
 
     public Motivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+        this.id = cdMotivo;
     }
 
-    public Motivo(Integer cdMotivo, String nbMnemo, String nbDescripcion) {
-        this.cdMotivo = cdMotivo;
-        this.nbMnemo = nbMnemo;
-        this.nbDescripcion = nbDescripcion;
+    public Motivo(Integer cdMotivo, String nbMnemo, String nbDescripcion, BigInteger stEstado) {
+        this.id = cdMotivo;
+        this.mnemonico = nbMnemo;
+        this.descripcion = nbDescripcion;
+        this.estado = stEstado;
     }
 
     public Integer getCdMotivo() {
-        return cdMotivo;
+        return id;
     }
 
     public void setCdMotivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+        this.id = cdMotivo;
     }
 
     public String getNbMnemo() {
-        return nbMnemo;
+        return mnemonico;
     }
 
     public void setNbMnemo(String nbMnemo) {
-        this.nbMnemo = nbMnemo;
+        this.mnemonico = nbMnemo;
     }
 
     public String getNbDescripcion() {
-        return nbDescripcion;
+        return descripcion;
     }
 
     public void setNbDescripcion(String nbDescripcion) {
-        this.nbDescripcion = nbDescripcion;
+        this.descripcion = nbDescripcion;
+    }
+
+    public Date getFhCreacion() {
+        return fechaHoraCreacion;
+    }
+
+    public void setFhCreacion(Date fhCreacion) {
+        this.fechaHoraCreacion = fhCreacion;
+    }
+
+    public Date getFhModificacion() {
+        return fechaHoraModificacion;
+    }
+
+    public void setFhModificacion(Date fhModificacion) {
+        this.fechaHoraModificacion = fhModificacion;
+    }
+
+    public String getCdUsuCrea() {
+        return usuarioCreacion;
+    }
+
+    public void setCdUsuCrea(String cdUsuCrea) {
+        this.usuarioCreacion = cdUsuCrea;
+    }
+
+    public String getCdUsuModi() {
+        return usuarioModificacion;
+    }
+
+    public void setCdUsuModi(String cdUsuModi) {
+        this.usuarioModificacion = cdUsuModi;
+    }
+
+    public BigInteger getStEstado() {
+        return estado;
+    }
+
+    public void setStEstado(BigInteger stEstado) {
+        this.estado = stEstado;
     }
 
     @XmlTransient
@@ -94,7 +157,7 @@ public class Motivo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdMotivo != null ? cdMotivo.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +168,7 @@ public class Motivo implements Serializable {
             return false;
         }
         Motivo other = (Motivo) object;
-        if ((this.cdMotivo == null && other.cdMotivo != null) || (this.cdMotivo != null && !this.cdMotivo.equals(other.cdMotivo))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -113,7 +176,7 @@ public class Motivo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + cdMotivo + " ]";
+        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + id + " ]";
     }
     
 }
