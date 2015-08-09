@@ -36,166 +36,122 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TerminalInactivo.findByFhFechaInicio", query = "SELECT t FROM TerminalInactivo t WHERE t.fhFechaInicio = :fhFechaInicio"),
     @NamedQuery(name = "TerminalInactivo.findByFhFechaFin", query = "SELECT t FROM TerminalInactivo t WHERE t.fhFechaFin = :fhFechaFin"),
     @NamedQuery(name = "TerminalInactivo.findByTxComentarios", query = "SELECT t FROM TerminalInactivo t WHERE t.txComentarios = :txComentarios"),
-    @NamedQuery(name = "TerminalInactivo.findByFhCreacion", query = "SELECT t FROM TerminalInactivo t WHERE t.fhCreacion = :fhCreacion"),
-    @NamedQuery(name = "TerminalInactivo.findByFhModificacion", query = "SELECT t FROM TerminalInactivo t WHERE t.fhModificacion = :fhModificacion"),
-    @NamedQuery(name = "TerminalInactivo.findByCdUsuCrea", query = "SELECT t FROM TerminalInactivo t WHERE t.cdUsuCrea = :cdUsuCrea"),
-    @NamedQuery(name = "TerminalInactivo.findByCdUsuModi", query = "SELECT t FROM TerminalInactivo t WHERE t.cdUsuModi = :cdUsuModi"),
     @NamedQuery(name = "TerminalInactivo.findByStEstado", query = "SELECT t FROM TerminalInactivo t WHERE t.stEstado = :stEstado")})
 public class TerminalInactivo implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_TERM_INACTIVO")
-    private Integer id;
+    private Integer cdTermInactivo;
     @Basic(optional = false)
     @Column(name = "CD_SERVIDOR")
-    private String idServidor;
+    private String cdServidor;
     @Basic(optional = false)
     @Column(name = "CD_PUESTO")
-    private String idPuesto;
+    private String cdPuesto;
     @Basic(optional = false)
     @Column(name = "FH_FECHA_INICIO")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraInicio;
+    private Date fhFechaInicio;
     @Basic(optional = false)
     @Column(name = "FH_FECHA_FIN")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraFin;
+    private Date fhFechaFin;
     @Basic(optional = false)
     @Column(name = "TX_COMENTARIOS")
-    private String textoComentarios;
-    @Column(name = "FH_CREACION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraCreacion;
-    @Column(name = "FH_MODIFICACION")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraModificacion;
-    @Column(name = "CD_USU_CREA")
-    private String usuarioCreacion;
-    @Column(name = "CD_USU_MODI")
-    private String usuarioModificacion;
+    private String txComentarios;
     @Basic(optional = false)
     @Column(name = "ST_ESTADO")
-    private BigInteger estado;
+    private BigInteger stEstado;
     @JoinColumn(name = "CD_MOTIVO", referencedColumnName = "CD_MOTIVO")
     @ManyToOne
-    private Motivo idMotivo;
+    private Motivo cdMotivo;
 
     public TerminalInactivo() {
     }
 
-    public TerminalInactivo(Integer id, String idServidor, String idPuesto, Date fechaHoraInicio, Date fechaHoraFin, String textoComentarios, BigInteger estado, Motivo idMotivo) {
-        this.id = id;
-        this.idServidor = idServidor;
-        this.idPuesto = idPuesto;
-        this.fechaHoraInicio = fechaHoraInicio;
-        this.fechaHoraFin = fechaHoraFin;
-        this.textoComentarios = textoComentarios;
-        this.estado = estado;
-        this.idMotivo = idMotivo;
+    public TerminalInactivo(Integer cdTermInactivo) {
+        this.cdTermInactivo = cdTermInactivo;
     }
 
-    public Integer getId() {
-        return id;
+    public TerminalInactivo(Integer cdTermInactivo, String cdServidor, String cdPuesto, Date fhFechaInicio, Date fhFechaFin, String txComentarios, BigInteger stEstado) {
+        this.cdTermInactivo = cdTermInactivo;
+        this.cdServidor = cdServidor;
+        this.cdPuesto = cdPuesto;
+        this.fhFechaInicio = fhFechaInicio;
+        this.fhFechaFin = fhFechaFin;
+        this.txComentarios = txComentarios;
+        this.stEstado = stEstado;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getCdTermInactivo() {
+        return cdTermInactivo;
     }
 
-    public String getIdServidor() {
-        return idServidor;
+    public void setCdTermInactivo(Integer cdTermInactivo) {
+        this.cdTermInactivo = cdTermInactivo;
     }
 
-    public void setIdServidor(String idServidor) {
-        this.idServidor = idServidor;
+    public String getCdServidor() {
+        return cdServidor;
     }
 
-    public String getIdPuesto() {
-        return idPuesto;
+    public void setCdServidor(String cdServidor) {
+        this.cdServidor = cdServidor;
     }
 
-    public void setIdPuesto(String idPuesto) {
-        this.idPuesto = idPuesto;
+    public String getCdPuesto() {
+        return cdPuesto;
     }
 
-    public Date getFechaHoraInicio() {
-        return fechaHoraInicio;
+    public void setCdPuesto(String cdPuesto) {
+        this.cdPuesto = cdPuesto;
     }
 
-    public void setFechaHoraInicio(Date fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
+    public Date getFhFechaInicio() {
+        return fhFechaInicio;
     }
 
-    public Date getFechaHoraFin() {
-        return fechaHoraFin;
+    public void setFhFechaInicio(Date fhFechaInicio) {
+        this.fhFechaInicio = fhFechaInicio;
     }
 
-    public void setFechaHoraFin(Date fechaHoraFin) {
-        this.fechaHoraFin = fechaHoraFin;
+    public Date getFhFechaFin() {
+        return fhFechaFin;
     }
 
-    public String getTextoComentarios() {
-        return textoComentarios;
+    public void setFhFechaFin(Date fhFechaFin) {
+        this.fhFechaFin = fhFechaFin;
     }
 
-    public void setTextoComentarios(String textoComentarios) {
-        this.textoComentarios = textoComentarios;
+    public String getTxComentarios() {
+        return txComentarios;
     }
 
-    public Date getFechaHoraCreacion() {
-        return fechaHoraCreacion;
+    public void setTxComentarios(String txComentarios) {
+        this.txComentarios = txComentarios;
     }
 
-    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
-        this.fechaHoraCreacion = fechaHoraCreacion;
+    public BigInteger getStEstado() {
+        return stEstado;
     }
 
-    public Date getFechaHoraModificacion() {
-        return fechaHoraModificacion;
+    public void setStEstado(BigInteger stEstado) {
+        this.stEstado = stEstado;
     }
 
-    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
-        this.fechaHoraModificacion = fechaHoraModificacion;
+    public Motivo getCdMotivo() {
+        return cdMotivo;
     }
 
-    public String getUsuarioCreacion() {
-        return usuarioCreacion;
-    }
-
-    public void setUsuarioCreacion(String usuarioCreacion) {
-        this.usuarioCreacion = usuarioCreacion;
-    }
-
-    public String getUsuarioModificacion() {
-        return usuarioModificacion;
-    }
-
-    public void setUsuarioModificacion(String usuarioModificacion) {
-        this.usuarioModificacion = usuarioModificacion;
-    }
-
-    public BigInteger getEstado() {
-        return estado;
-    }
-
-    public void setEstado(BigInteger estado) {
-        this.estado = estado;
-    }
-
-    public Motivo getIdMotivo() {
-        return idMotivo;
-    }
-
-    public void setIdMotivo(Motivo idMotivo) {
-        this.idMotivo = idMotivo;
+    public void setCdMotivo(Motivo cdMotivo) {
+        this.cdMotivo = cdMotivo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (cdTermInactivo != null ? cdTermInactivo.hashCode() : 0);
         return hash;
     }
 
@@ -206,7 +162,7 @@ public class TerminalInactivo implements Serializable {
             return false;
         }
         TerminalInactivo other = (TerminalInactivo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.cdTermInactivo == null && other.cdTermInactivo != null) || (this.cdTermInactivo != null && !this.cdTermInactivo.equals(other.cdTermInactivo))) {
             return false;
         }
         return true;
@@ -214,7 +170,7 @@ public class TerminalInactivo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.TerminalInactivo[ cdTermInactivo=" + id + " ]";
+        return "com.bbva.admbio.model.TerminalInactivo[ cdTermInactivo=" + cdTermInactivo + " ]";
     }
-
+    
 }
