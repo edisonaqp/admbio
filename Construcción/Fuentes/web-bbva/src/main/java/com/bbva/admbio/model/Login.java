@@ -6,6 +6,7 @@
 package com.bbva.admbio.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,122 +35,177 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findByCdRegistro", query = "SELECT l FROM Login l WHERE l.cdRegistro = :cdRegistro"),
     @NamedQuery(name = "Login.findByCdPerfil", query = "SELECT l FROM Login l WHERE l.cdPerfil = :cdPerfil"),
     @NamedQuery(name = "Login.findByNbUsuario", query = "SELECT l FROM Login l WHERE l.nbUsuario = :nbUsuario"),
-    @NamedQuery(name = "Login.findByFhLogin", query = "SELECT l FROM Login l WHERE l.fhLogin = :fhLogin")})
+    @NamedQuery(name = "Login.findByFhLogin", query = "SELECT l FROM Login l WHERE l.fhLogin = :fhLogin"),
+    @NamedQuery(name = "Login.findByFhCreacion", query = "SELECT l FROM Login l WHERE l.fhCreacion = :fhCreacion"),
+    @NamedQuery(name = "Login.findByFhModificacion", query = "SELECT l FROM Login l WHERE l.fhModificacion = :fhModificacion"),
+    @NamedQuery(name = "Login.findByCdUsuCrea", query = "SELECT l FROM Login l WHERE l.cdUsuCrea = :cdUsuCrea"),
+    @NamedQuery(name = "Login.findByCdUsuModi", query = "SELECT l FROM Login l WHERE l.cdUsuModi = :cdUsuModi"),
+    @NamedQuery(name = "Login.findByStEstado", query = "SELECT l FROM Login l WHERE l.stEstado = :stEstado")})
 public class Login implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_LOGIN")
-    private Integer cdLogin;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "CD_OFICINA")
-    private String cdOficina;
+    private String idOficina;
     @Basic(optional = false)
     @Column(name = "NB_SERVIDOR")
-    private String nbServidor;
+    private String nombreServidor;
     @Basic(optional = false)
     @Column(name = "NU_PUESTO")
-    private String nuPuesto;
+    private String numeroPuesto;
     @Basic(optional = false)
     @Column(name = "CD_REGISTRO")
-    private String cdRegistro;
+    private String idRegistro;
     @Basic(optional = false)
     @Column(name = "CD_PERFIL")
-    private String cdPerfil;
+    private String idPerfil;
     @Basic(optional = false)
     @Column(name = "NB_USUARIO")
-    private String nbUsuario;
+    private String nombreUsuario;
     @Basic(optional = false)
     @Column(name = "FH_LOGIN")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fhLogin;
+    private Date fechaHoraLogin;
+    @Column(name = "FH_CREACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraCreacion;
+    @Column(name = "FH_MODIFICACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraModificacion;
+    @Column(name = "CD_USU_CREA")
+    private String usuarioCreacion;
+    @Column(name = "CD_USU_MODI")
+    private String usuarioModificacion;
+    @Basic(optional = false)
+    @Column(name = "ST_ESTADO")
+    private BigInteger estado;
 
     public Login() {
     }
 
-    public Login(Integer cdLogin) {
-        this.cdLogin = cdLogin;
+    public Login(Integer id, String idOficina, String nombreServidor, String numeroPuesto, String idRegistro, String idPerfil, String nombreUsuario, Date fechaHoraLogin) {
+        this.id = id;
+        this.idOficina = idOficina;
+        this.nombreServidor = nombreServidor;
+        this.numeroPuesto = numeroPuesto;
+        this.idRegistro = idRegistro;
+        this.idPerfil = idPerfil;
+        this.nombreUsuario = nombreUsuario;
+        this.fechaHoraLogin = fechaHoraLogin;
     }
 
-    public Login(Integer cdLogin, String cdOficina, String nbServidor, String nuPuesto, String cdRegistro, String cdPerfil, String nbUsuario, Date fhLogin) {
-        this.cdLogin = cdLogin;
-        this.cdOficina = cdOficina;
-        this.nbServidor = nbServidor;
-        this.nuPuesto = nuPuesto;
-        this.cdRegistro = cdRegistro;
-        this.cdPerfil = cdPerfil;
-        this.nbUsuario = nbUsuario;
-        this.fhLogin = fhLogin;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getCdLogin() {
-        return cdLogin;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCdLogin(Integer cdLogin) {
-        this.cdLogin = cdLogin;
+    public String getIdOficina() {
+        return idOficina;
     }
 
-    public String getCdOficina() {
-        return cdOficina;
+    public void setIdOficina(String idOficina) {
+        this.idOficina = idOficina;
     }
 
-    public void setCdOficina(String cdOficina) {
-        this.cdOficina = cdOficina;
+    public String getNombreServidor() {
+        return nombreServidor;
     }
 
-    public String getNbServidor() {
-        return nbServidor;
+    public void setNombreServidor(String nombreServidor) {
+        this.nombreServidor = nombreServidor;
     }
 
-    public void setNbServidor(String nbServidor) {
-        this.nbServidor = nbServidor;
+    public String getNumeroPuesto() {
+        return numeroPuesto;
     }
 
-    public String getNuPuesto() {
-        return nuPuesto;
+    public void setNumeroPuesto(String numeroPuesto) {
+        this.numeroPuesto = numeroPuesto;
     }
 
-    public void setNuPuesto(String nuPuesto) {
-        this.nuPuesto = nuPuesto;
+    public String getIdRegistro() {
+        return idRegistro;
     }
 
-    public String getCdRegistro() {
-        return cdRegistro;
+    public void setIdRegistro(String idRegistro) {
+        this.idRegistro = idRegistro;
     }
 
-    public void setCdRegistro(String cdRegistro) {
-        this.cdRegistro = cdRegistro;
+    public String getIdPerfil() {
+        return idPerfil;
     }
 
-    public String getCdPerfil() {
-        return cdPerfil;
+    public void setIdPerfil(String idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
-    public void setCdPerfil(String cdPerfil) {
-        this.cdPerfil = cdPerfil;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public String getNbUsuario() {
-        return nbUsuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public void setNbUsuario(String nbUsuario) {
-        this.nbUsuario = nbUsuario;
+    public Date getFechaHoraLogin() {
+        return fechaHoraLogin;
     }
 
-    public Date getFhLogin() {
-        return fhLogin;
+    public void setFechaHoraLogin(Date fechaHoraLogin) {
+        this.fechaHoraLogin = fechaHoraLogin;
     }
 
-    public void setFhLogin(Date fhLogin) {
-        this.fhLogin = fhLogin;
+    public Date getFechaHoraCreacion() {
+        return fechaHoraCreacion;
+    }
+
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
+    }
+
+    public Date getFechaHoraModificacion() {
+        return fechaHoraModificacion;
+    }
+
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
+    }
+
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public String getUsuarioModificacion() {
+        return usuarioModificacion;
+    }
+
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
+    }
+
+    public BigInteger getEstado() {
+        return estado;
+    }
+
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdLogin != null ? cdLogin.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -160,7 +216,7 @@ public class Login implements Serializable {
             return false;
         }
         Login other = (Login) object;
-        if ((this.cdLogin == null && other.cdLogin != null) || (this.cdLogin != null && !this.cdLogin.equals(other.cdLogin))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -168,7 +224,7 @@ public class Login implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.Login[ cdLogin=" + cdLogin + " ]";
+        return "com.bbva.admbio.model.Login[ cdLogin=" + id + " ]";
     }
-    
+
 }

@@ -7,6 +7,7 @@ package com.bbva.admbio.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,73 +31,116 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EstadoCliente.findByCdEstadoCli", query = "SELECT e FROM EstadoCliente e WHERE e.cdEstadoCli = :cdEstadoCli"),
     @NamedQuery(name = "EstadoCliente.findByCdTipoDoc", query = "SELECT e FROM EstadoCliente e WHERE e.cdTipoDoc = :cdTipoDoc"),
     @NamedQuery(name = "EstadoCliente.findByNuNumeroDocumento", query = "SELECT e FROM EstadoCliente e WHERE e.nuNumeroDocumento = :nuNumeroDocumento"),
-    @NamedQuery(name = "EstadoCliente.findByStIndicadorPdp", query = "SELECT e FROM EstadoCliente e WHERE e.stIndicadorPdp = :stIndicadorPdp")})
+    @NamedQuery(name = "EstadoCliente.findByStIndicadorPdp", query = "SELECT e FROM EstadoCliente e WHERE e.stIndicadorPdp = :stIndicadorPdp"),
+    @NamedQuery(name = "EstadoCliente.findByFhCreacion", query = "SELECT e FROM EstadoCliente e WHERE e.fhCreacion = :fhCreacion"),
+    @NamedQuery(name = "EstadoCliente.findByFhModificacion", query = "SELECT e FROM EstadoCliente e WHERE e.fhModificacion = :fhModificacion"),
+    @NamedQuery(name = "EstadoCliente.findByCdUsuCrea", query = "SELECT e FROM EstadoCliente e WHERE e.cdUsuCrea = :cdUsuCrea"),
+    @NamedQuery(name = "EstadoCliente.findByCdUsuModi", query = "SELECT e FROM EstadoCliente e WHERE e.cdUsuModi = :cdUsuModi")})
 public class EstadoCliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_ESTADO_CLI")
-    private Integer cdEstadoCli;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "CD_TIPO_DOC")
-    private String cdTipoDoc;
+    private String idTipoDocumento;
     @Basic(optional = false)
     @Column(name = "NU_NUMERO_DOCUMENTO")
-    private String nuNumeroDocumento;
+    private String numeroDocumento;
     @Basic(optional = false)
     @Column(name = "ST_INDICADOR_PDP")
-    private BigInteger stIndicadorPdp;
+    private BigInteger estadoIndicadorPdp;
+    @Column(name = "FH_CREACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraCreacion;
+    @Column(name = "FH_MODIFICACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraModificacion;
+    @Column(name = "CD_USU_CREA")
+    private String usuarioCreacion;
+    @Column(name = "CD_USU_MODI")
+    private String usuarioModificacion;
 
     public EstadoCliente() {
     }
 
-    public EstadoCliente(Integer cdEstadoCli) {
-        this.cdEstadoCli = cdEstadoCli;
+    public EstadoCliente(Integer id, String idTipoDocumento, String numeroDocumento, BigInteger estadoIndicadorPdp) {
+        this.id = id;
+        this.idTipoDocumento = idTipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.estadoIndicadorPdp = estadoIndicadorPdp;
     }
 
-    public EstadoCliente(Integer cdEstadoCli, String cdTipoDoc, String nuNumeroDocumento, BigInteger stIndicadorPdp) {
-        this.cdEstadoCli = cdEstadoCli;
-        this.cdTipoDoc = cdTipoDoc;
-        this.nuNumeroDocumento = nuNumeroDocumento;
-        this.stIndicadorPdp = stIndicadorPdp;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getCdEstadoCli() {
-        return cdEstadoCli;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCdEstadoCli(Integer cdEstadoCli) {
-        this.cdEstadoCli = cdEstadoCli;
+    public String getIdTipoDocumento() {
+        return idTipoDocumento;
     }
 
-    public String getCdTipoDoc() {
-        return cdTipoDoc;
+    public void setIdTipoDocumento(String idTipoDocumento) {
+        this.idTipoDocumento = idTipoDocumento;
     }
 
-    public void setCdTipoDoc(String cdTipoDoc) {
-        this.cdTipoDoc = cdTipoDoc;
+    public String getNumeroDocumento() {
+        return numeroDocumento;
     }
 
-    public String getNuNumeroDocumento() {
-        return nuNumeroDocumento;
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
-    public void setNuNumeroDocumento(String nuNumeroDocumento) {
-        this.nuNumeroDocumento = nuNumeroDocumento;
+    public BigInteger getEstadoIndicadorPdp() {
+        return estadoIndicadorPdp;
     }
 
-    public BigInteger getStIndicadorPdp() {
-        return stIndicadorPdp;
+    public void setEstadoIndicadorPdp(BigInteger estadoIndicadorPdp) {
+        this.estadoIndicadorPdp = estadoIndicadorPdp;
     }
 
-    public void setStIndicadorPdp(BigInteger stIndicadorPdp) {
-        this.stIndicadorPdp = stIndicadorPdp;
+    public Date getFechaHoraCreacion() {
+        return fechaHoraCreacion;
+    }
+
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
+    }
+
+    public Date getFechaHoraModificacion() {
+        return fechaHoraModificacion;
+    }
+
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
+    }
+
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public String getUsuarioModificacion() {
+        return usuarioModificacion;
+    }
+
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdEstadoCli != null ? cdEstadoCli.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +151,7 @@ public class EstadoCliente implements Serializable {
             return false;
         }
         EstadoCliente other = (EstadoCliente) object;
-        if ((this.cdEstadoCli == null && other.cdEstadoCli != null) || (this.cdEstadoCli != null && !this.cdEstadoCli.equals(other.cdEstadoCli))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -113,7 +159,7 @@ public class EstadoCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.EstadoCliente[ cdEstadoCli=" + cdEstadoCli + " ]";
+        return "com.bbva.admbio.model.EstadoCliente[ cdEstadoCli=" + id + " ]";
     }
-    
+
 }

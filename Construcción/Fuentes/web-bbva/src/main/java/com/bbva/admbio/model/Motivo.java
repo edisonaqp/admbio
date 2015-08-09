@@ -6,6 +6,8 @@
 package com.bbva.admbio.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,59 +33,117 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Motivo.findAll", query = "SELECT m FROM Motivo m"),
     @NamedQuery(name = "Motivo.findByCdMotivo", query = "SELECT m FROM Motivo m WHERE m.cdMotivo = :cdMotivo"),
     @NamedQuery(name = "Motivo.findByNbMnemo", query = "SELECT m FROM Motivo m WHERE m.nbMnemo = :nbMnemo"),
-    @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion")})
+    @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion"),
+    @NamedQuery(name = "Motivo.findByFhCreacion", query = "SELECT m FROM Motivo m WHERE m.fhCreacion = :fhCreacion"),
+    @NamedQuery(name = "Motivo.findByFhModificacion", query = "SELECT m FROM Motivo m WHERE m.fhModificacion = :fhModificacion"),
+    @NamedQuery(name = "Motivo.findByCdUsuCrea", query = "SELECT m FROM Motivo m WHERE m.cdUsuCrea = :cdUsuCrea"),
+    @NamedQuery(name = "Motivo.findByCdUsuModi", query = "SELECT m FROM Motivo m WHERE m.cdUsuModi = :cdUsuModi"),
+    @NamedQuery(name = "Motivo.findByStEstado", query = "SELECT m FROM Motivo m WHERE m.stEstado = :stEstado")})
 public class Motivo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_MOTIVO")
-    private Integer cdMotivo;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "NB_MNEMO")
-    private String nbMnemo;
+    private String mnemonico;
     @Basic(optional = false)
     @Column(name = "NB_DESCRIPCION")
-    private String nbDescripcion;
+    private String nombreDescripcion;
+    @Column(name = "FH_CREACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraCreacion;
+    @Column(name = "FH_MODIFICACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraModificacion;
+    @Column(name = "CD_USU_CREA")
+    private String usuarioCreacion;
+    @Column(name = "CD_USU_MODI")
+    private String usuarioModificacion;
+    @Basic(optional = false)
+    @Column(name = "ST_ESTADO")
+    private BigInteger estado;
     @OneToMany(mappedBy = "cdMotivo")
     private List<TerminalInactivo> terminalInactivoList;
 
     public Motivo() {
     }
 
-    public Motivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+    public Motivo(Integer id, String mnemonico, String nombreDescripcion, BigInteger estado, List<TerminalInactivo> terminalInactivoList) {
+        this.id = id;
+        this.mnemonico = mnemonico;
+        this.nombreDescripcion = nombreDescripcion;
+        this.estado = estado;
+        this.terminalInactivoList = terminalInactivoList;
     }
 
-    public Motivo(Integer cdMotivo, String nbMnemo, String nbDescripcion) {
-        this.cdMotivo = cdMotivo;
-        this.nbMnemo = nbMnemo;
-        this.nbDescripcion = nbDescripcion;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getCdMotivo() {
-        return cdMotivo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCdMotivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+    public String getMnemonico() {
+        return mnemonico;
     }
 
-    public String getNbMnemo() {
-        return nbMnemo;
+    public void setMnemonico(String mnemonico) {
+        this.mnemonico = mnemonico;
     }
 
-    public void setNbMnemo(String nbMnemo) {
-        this.nbMnemo = nbMnemo;
+    public String getNombreDescripcion() {
+        return nombreDescripcion;
     }
 
-    public String getNbDescripcion() {
-        return nbDescripcion;
+    public void setNombreDescripcion(String nombreDescripcion) {
+        this.nombreDescripcion = nombreDescripcion;
     }
 
-    public void setNbDescripcion(String nbDescripcion) {
-        this.nbDescripcion = nbDescripcion;
+    public Date getFechaHoraCreacion() {
+        return fechaHoraCreacion;
     }
 
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
+    }
+
+    public Date getFechaHoraModificacion() {
+        return fechaHoraModificacion;
+    }
+
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
+    }
+
+    public String getUsuarioCreacion() {
+        return usuarioCreacion;
+    }
+
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
+    }
+
+    public String getUsuarioModificacion() {
+        return usuarioModificacion;
+    }
+
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
+    }
+
+    public BigInteger getEstado() {
+        return estado;
+    }
+
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
+    }
+
+    
+    
     @XmlTransient
     public List<TerminalInactivo> getTerminalInactivoList() {
         return terminalInactivoList;
@@ -94,7 +156,7 @@ public class Motivo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdMotivo != null ? cdMotivo.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +167,7 @@ public class Motivo implements Serializable {
             return false;
         }
         Motivo other = (Motivo) object;
-        if ((this.cdMotivo == null && other.cdMotivo != null) || (this.cdMotivo != null && !this.cdMotivo.equals(other.cdMotivo))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -113,7 +175,7 @@ public class Motivo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + cdMotivo + " ]";
+        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + id + " ]";
     }
     
 }
