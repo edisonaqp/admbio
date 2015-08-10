@@ -32,86 +32,146 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DepuracionCliente.findByFhEjecucion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhEjecucion = :fhEjecucion"),
     @NamedQuery(name = "DepuracionCliente.findByCtIncial", query = "SELECT d FROM DepuracionCliente d WHERE d.ctIncial = :ctIncial"),
     @NamedQuery(name = "DepuracionCliente.findByCtFinal", query = "SELECT d FROM DepuracionCliente d WHERE d.ctFinal = :ctFinal"),
-    @NamedQuery(name = "DepuracionCliente.findByCtDepurados", query = "SELECT d FROM DepuracionCliente d WHERE d.ctDepurados = :ctDepurados")})
+    @NamedQuery(name = "DepuracionCliente.findByCtDepurados", query = "SELECT d FROM DepuracionCliente d WHERE d.ctDepurados = :ctDepurados"),
+    @NamedQuery(name = "DepuracionCliente.findByFhCreacion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhCreacion = :fhCreacion"),
+    @NamedQuery(name = "DepuracionCliente.findByFhModificacion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhModificacion = :fhModificacion"),
+    @NamedQuery(name = "DepuracionCliente.findByCdUsuCrea", query = "SELECT d FROM DepuracionCliente d WHERE d.cdUsuCrea = :cdUsuCrea"),
+    @NamedQuery(name = "DepuracionCliente.findByCdUsuModi", query = "SELECT d FROM DepuracionCliente d WHERE d.cdUsuModi = :cdUsuModi"),
+    @NamedQuery(name = "DepuracionCliente.findByStEstado", query = "SELECT d FROM DepuracionCliente d WHERE d.stEstado = :stEstado")})
 public class DepuracionCliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_DEPURACION_CLIENTE")
-    private Integer cdDepuracionCliente;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "FH_EJECUCION")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fhEjecucion;
+    private Date fechaHoraEjecucion;
     @Basic(optional = false)
     @Column(name = "CT_INCIAL")
-    private BigInteger ctIncial;
+    private BigInteger cantidadIncial;
     @Basic(optional = false)
     @Column(name = "CT_FINAL")
-    private BigInteger ctFinal;
+    private BigInteger cantidadFinal;
     @Basic(optional = false)
     @Column(name = "CT_DEPURADOS")
-    private BigInteger ctDepurados;
+    private BigInteger cantidadDepurados;
+    @Column(name = "FH_CREACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraCreacion;
+    @Column(name = "FH_MODIFICACION")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaHoraModificacion;
+    @Column(name = "CD_USU_CREA")
+    private String usuarioCreador;
+    @Column(name = "CD_USU_MODI")
+    private String usuarioModificador;
+    @Basic(optional = false)
+    @Column(name = "ST_ESTADO")
+    private BigInteger estado;
 
     public DepuracionCliente() {
     }
 
-    public DepuracionCliente(Integer cdDepuracionCliente) {
-        this.cdDepuracionCliente = cdDepuracionCliente;
+    public DepuracionCliente(Integer id, Date fechaHoraEjecucion, BigInteger cantidadIncial, BigInteger cantidadFinal, BigInteger cantidadDepurados, Date fechaHoraCreacion, Date fechaHoraModificacion, String usuarioCreador, String usuarioModificador, BigInteger estado) {
+        this.id = id;
+        this.fechaHoraEjecucion = fechaHoraEjecucion;
+        this.cantidadIncial = cantidadIncial;
+        this.cantidadFinal = cantidadFinal;
+        this.cantidadDepurados = cantidadDepurados;
+        this.fechaHoraCreacion = fechaHoraCreacion;
+        this.fechaHoraModificacion = fechaHoraModificacion;
+        this.usuarioCreador = usuarioCreador;
+        this.usuarioModificador = usuarioModificador;
+        this.estado = estado;
     }
 
-    public DepuracionCliente(Integer cdDepuracionCliente, Date fhEjecucion, BigInteger ctIncial, BigInteger ctFinal, BigInteger ctDepurados) {
-        this.cdDepuracionCliente = cdDepuracionCliente;
-        this.fhEjecucion = fhEjecucion;
-        this.ctIncial = ctIncial;
-        this.ctFinal = ctFinal;
-        this.ctDepurados = ctDepurados;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getCdDepuracionCliente() {
-        return cdDepuracionCliente;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setCdDepuracionCliente(Integer cdDepuracionCliente) {
-        this.cdDepuracionCliente = cdDepuracionCliente;
+    public Date getFechaHoraEjecucion() {
+        return fechaHoraEjecucion;
     }
 
-    public Date getFhEjecucion() {
-        return fhEjecucion;
+    public void setFechaHoraEjecucion(Date fechaHoraEjecucion) {
+        this.fechaHoraEjecucion = fechaHoraEjecucion;
     }
 
-    public void setFhEjecucion(Date fhEjecucion) {
-        this.fhEjecucion = fhEjecucion;
+    public BigInteger getCantidadIncial() {
+        return cantidadIncial;
     }
 
-    public BigInteger getCtIncial() {
-        return ctIncial;
+    public void setCantidadIncial(BigInteger cantidadIncial) {
+        this.cantidadIncial = cantidadIncial;
     }
 
-    public void setCtIncial(BigInteger ctIncial) {
-        this.ctIncial = ctIncial;
+    public BigInteger getCantidadFinal() {
+        return cantidadFinal;
     }
 
-    public BigInteger getCtFinal() {
-        return ctFinal;
+    public void setCantidadFinal(BigInteger cantidadFinal) {
+        this.cantidadFinal = cantidadFinal;
     }
 
-    public void setCtFinal(BigInteger ctFinal) {
-        this.ctFinal = ctFinal;
+    public BigInteger getCantidadDepurados() {
+        return cantidadDepurados;
     }
 
-    public BigInteger getCtDepurados() {
-        return ctDepurados;
+    public void setCantidadDepurados(BigInteger cantidadDepurados) {
+        this.cantidadDepurados = cantidadDepurados;
     }
 
-    public void setCtDepurados(BigInteger ctDepurados) {
-        this.ctDepurados = ctDepurados;
+    public Date getFechaHoraCreacion() {
+        return fechaHoraCreacion;
     }
 
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
+    }
+
+    public Date getFechaHoraModificacion() {
+        return fechaHoraModificacion;
+    }
+
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
+    }
+
+    public String getUsuarioCreador() {
+        return usuarioCreador;
+    }
+
+    public void setUsuarioCreador(String usuarioCreador) {
+        this.usuarioCreador = usuarioCreador;
+    }
+
+    public String getUsuarioModificador() {
+        return usuarioModificador;
+    }
+
+    public void setUsuarioModificador(String usuarioModificador) {
+        this.usuarioModificador = usuarioModificador;
+    }
+
+    public BigInteger getEstado() {
+        return estado;
+    }
+
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
+    }
+   
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdDepuracionCliente != null ? cdDepuracionCliente.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +182,7 @@ public class DepuracionCliente implements Serializable {
             return false;
         }
         DepuracionCliente other = (DepuracionCliente) object;
-        if ((this.cdDepuracionCliente == null && other.cdDepuracionCliente != null) || (this.cdDepuracionCliente != null && !this.cdDepuracionCliente.equals(other.cdDepuracionCliente))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -130,7 +190,7 @@ public class DepuracionCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.DepuracionCliente[ cdDepuracionCliente=" + cdDepuracionCliente + " ]";
+        return "com.bbva.admbio.model.DepuracionCliente[ cdDepuracionCliente=" + id + " ]";
     }
     
 }
