@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ServidorOficina.findByCdUsuModi", query = "SELECT s FROM ServidorOficina s WHERE s.cdUsuModi = :cdUsuModi"),
     @NamedQuery(name = "ServidorOficina.findByStEstado", query = "SELECT s FROM ServidorOficina s WHERE s.stEstado = :stEstado")})
 public class ServidorOficina implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -65,79 +66,75 @@ public class ServidorOficina implements Serializable {
     public ServidorOficina() {
     }
 
-    public ServidorOficina(Integer cdServidorOf) {
-        this.id = cdServidorOf;
+    public ServidorOficina(Integer id, String idOficina, String idServidor, BigInteger estado) {
+        this.id = id;
+        this.idOficina = idOficina;
+        this.idServidor = idServidor;
+        this.estado = estado;
     }
 
-    public ServidorOficina(Integer cdServidorOf, String cdOficina, String cdServidor, BigInteger stEstado) {
-        this.id = cdServidorOf;
-        this.idOficina = cdOficina;
-        this.idServidor = cdServidor;
-        this.estado = stEstado;
-    }
-
-    public Integer getCdServidorOf() {
+    public Integer getId() {
         return id;
     }
 
-    public void setCdServidorOf(Integer cdServidorOf) {
-        this.id = cdServidorOf;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCdOficina() {
+    public String getIdOficina() {
         return idOficina;
     }
 
-    public void setCdOficina(String cdOficina) {
-        this.idOficina = cdOficina;
+    public void setIdOficina(String idOficina) {
+        this.idOficina = idOficina;
     }
 
-    public String getCdServidor() {
+    public String getIdServidor() {
         return idServidor;
     }
 
-    public void setCdServidor(String cdServidor) {
-        this.idServidor = cdServidor;
+    public void setIdServidor(String idServidor) {
+        this.idServidor = idServidor;
     }
 
-    public Date getFhCreacion() {
+    public Date getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
-    public void setFhCreacion(Date fhCreacion) {
-        this.fechaHoraCreacion = fhCreacion;
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
-    public Date getFhModificacion() {
+    public Date getFechaHoraModificacion() {
         return fechaHoraModificacion;
     }
 
-    public void setFhModificacion(Date fhModificacion) {
-        this.fechaHoraModificacion = fhModificacion;
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
     }
 
-    public String getCdUsuCrea() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setCdUsuCrea(String cdUsuCrea) {
-        this.usuarioCreacion = cdUsuCrea;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
-    public String getCdUsuModi() {
+    public String getUsuarioModificacion() {
         return usuarioModificacion;
     }
 
-    public void setCdUsuModi(String cdUsuModi) {
-        this.usuarioModificacion = cdUsuModi;
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 
-    public BigInteger getStEstado() {
+    public BigInteger getEstado() {
         return estado;
     }
 
-    public void setStEstado(BigInteger stEstado) {
-        this.estado = stEstado;
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -164,5 +161,5 @@ public class ServidorOficina implements Serializable {
     public String toString() {
         return "com.bbva.admbio.model.ServidorOficina[ cdServidorOf=" + id + " ]";
     }
-    
+
 }

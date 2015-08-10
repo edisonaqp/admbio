@@ -84,116 +84,114 @@ public class TerminalInactivo implements Serializable {
     public TerminalInactivo() {
     }
 
-    public TerminalInactivo(Integer cdTermInactivo) {
-        this.id = cdTermInactivo;
+    public TerminalInactivo(Integer id, String idServidor, String idPuesto, Date fechaHoraInicio, Date fechaHoraFin, String textoComentarios, BigInteger estado, Motivo motivo) {
+        this.id = id;
+        this.idServidor = idServidor;
+        this.idPuesto = idPuesto;
+        this.fechaHoraInicio = fechaHoraInicio;
+        this.fechaHoraFin = fechaHoraFin;
+        this.textoComentarios = textoComentarios;
+        this.estado = estado;
+        this.motivo = motivo;
     }
 
-    public TerminalInactivo(Integer cdTermInactivo, String cdServidor, String cdPuesto, Date fhFechaInicio, Date fhFechaFin, String txComentarios, BigInteger stEstado) {
-        this.id = cdTermInactivo;
-        this.idServidor = cdServidor;
-        this.idPuesto = cdPuesto;
-        this.fechaHoraInicio = fhFechaInicio;
-        this.fechaHoraFin = fhFechaFin;
-        this.textoComentarios = txComentarios;
-        this.estado = stEstado;
-    }
-
-    public Integer getCdTermInactivo() {
+    public Integer getId() {
         return id;
     }
 
-    public void setCdTermInactivo(Integer cdTermInactivo) {
-        this.id = cdTermInactivo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCdServidor() {
+    public String getIdServidor() {
         return idServidor;
     }
 
-    public void setCdServidor(String cdServidor) {
-        this.idServidor = cdServidor;
+    public void setIdServidor(String idServidor) {
+        this.idServidor = idServidor;
     }
 
-    public String getCdPuesto() {
+    public String getIdPuesto() {
         return idPuesto;
     }
 
-    public void setCdPuesto(String cdPuesto) {
-        this.idPuesto = cdPuesto;
+    public void setIdPuesto(String idPuesto) {
+        this.idPuesto = idPuesto;
     }
 
-    public Date getFhFechaInicio() {
+    public Date getFechaHoraInicio() {
         return fechaHoraInicio;
     }
 
-    public void setFhFechaInicio(Date fhFechaInicio) {
-        this.fechaHoraInicio = fhFechaInicio;
+    public void setFechaHoraInicio(Date fechaHoraInicio) {
+        this.fechaHoraInicio = fechaHoraInicio;
     }
 
-    public Date getFhFechaFin() {
+    public Date getFechaHoraFin() {
         return fechaHoraFin;
     }
 
-    public void setFhFechaFin(Date fhFechaFin) {
-        this.fechaHoraFin = fhFechaFin;
+    public void setFechaHoraFin(Date fechaHoraFin) {
+        this.fechaHoraFin = fechaHoraFin;
     }
 
-    public String getTxComentarios() {
+    public String getTextoComentarios() {
         return textoComentarios;
     }
 
-    public void setTxComentarios(String txComentarios) {
-        this.textoComentarios = txComentarios;
+    public void setTextoComentarios(String textoComentarios) {
+        this.textoComentarios = textoComentarios;
     }
 
-    public Date getFhCreacion() {
+    public Date getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
-    public void setFhCreacion(Date fhCreacion) {
-        this.fechaHoraCreacion = fhCreacion;
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
-    public Date getFhModificacion() {
+    public Date getFechaHoraModificacion() {
         return fechaHoraModificacion;
     }
 
-    public void setFhModificacion(Date fhModificacion) {
-        this.fechaHoraModificacion = fhModificacion;
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
     }
 
-    public String getCdUsuCrea() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setCdUsuCrea(String cdUsuCrea) {
-        this.usuarioCreacion = cdUsuCrea;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
-    public String getCdUsuModi() {
+    public String getUsuarioModificacion() {
         return usuarioModificacion;
     }
 
-    public void setCdUsuModi(String cdUsuModi) {
-        this.usuarioModificacion = cdUsuModi;
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 
-    public BigInteger getStEstado() {
+    public BigInteger getEstado() {
         return estado;
     }
 
-    public void setStEstado(BigInteger stEstado) {
-        this.estado = stEstado;
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
     }
 
-    public Motivo getCdMotivo() {
+    public Motivo getMotivo() {
         return motivo;
     }
 
-    public void setCdMotivo(Motivo cdMotivo) {
-        this.motivo = cdMotivo;
+    public void setMotivo(Motivo motivo) {
+        this.motivo = motivo;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 0;

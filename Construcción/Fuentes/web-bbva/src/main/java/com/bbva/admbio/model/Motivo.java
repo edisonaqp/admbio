@@ -82,68 +82,68 @@ public class Motivo implements Serializable {
         this.estado = estado;
     }
 
-    public Integer getCdMotivo() {
+    public Integer getId() {
         return id;
     }
 
-    public void setCdMotivo(Integer cdMotivo) {
-        this.id = cdMotivo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getNbMnemo() {
+    public String getMnemonico() {
         return mnemonico;
     }
 
-    public void setNbMnemo(String nbMnemo) {
-        this.mnemonico = nbMnemo;
+    public void setMnemonico(String mnemonico) {
+        this.mnemonico = mnemonico;
     }
 
-    public String getNbDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setNbDescripcion(String nbDescripcion) {
-        this.descripcion = nbDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Date getFhCreacion() {
+    public Date getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
-    public void setFhCreacion(Date fhCreacion) {
-        this.fechaHoraCreacion = fhCreacion;
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
-    public Date getFhModificacion() {
+    public Date getFechaHoraModificacion() {
         return fechaHoraModificacion;
     }
 
-    public void setFhModificacion(Date fhModificacion) {
-        this.fechaHoraModificacion = fhModificacion;
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
     }
 
-    public String getCdUsuCrea() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setCdUsuCrea(String cdUsuCrea) {
-        this.usuarioCreacion = cdUsuCrea;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
-    public String getCdUsuModi() {
+    public String getUsuarioModificacion() {
         return usuarioModificacion;
     }
 
-    public void setCdUsuModi(String cdUsuModi) {
-        this.usuarioModificacion = cdUsuModi;
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 
-    public BigInteger getStEstado() {
+    public BigInteger getEstado() {
         return estado;
     }
 
-    public void setStEstado(BigInteger stEstado) {
-        this.estado = stEstado;
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
     }
 
     @XmlTransient

@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findByCdUsuModi", query = "SELECT l FROM Login l WHERE l.cdUsuModi = :cdUsuModi"),
     @NamedQuery(name = "Login.findByStEstado", query = "SELECT l FROM Login l WHERE l.stEstado = :stEstado")})
 public class Login implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -86,124 +87,120 @@ public class Login implements Serializable {
     public Login() {
     }
 
-    public Login(Integer cdLogin) {
-        this.id = cdLogin;
+    public Login(Integer id, String idOficina, String nombreServidor, String numeroPuesto, String idRegistro, String idPerfil, String nombreUsuario, Date fechaHoraLogin, BigInteger estado) {
+        this.id = id;
+        this.idOficina = idOficina;
+        this.nombreServidor = nombreServidor;
+        this.numeroPuesto = numeroPuesto;
+        this.idRegistro = idRegistro;
+        this.idPerfil = idPerfil;
+        this.nombreUsuario = nombreUsuario;
+        this.fechaHoraLogin = fechaHoraLogin;
+        this.estado = estado;
     }
 
-    public Login(Integer cdLogin, String cdOficina, String nbServidor, String nuPuesto, String cdRegistro, String cdPerfil, String nbUsuario, Date fhLogin, BigInteger stEstado) {
-        this.id = cdLogin;
-        this.idOficina = cdOficina;
-        this.nombreServidor = nbServidor;
-        this.numeroPuesto = nuPuesto;
-        this.idRegistro = cdRegistro;
-        this.idPerfil = cdPerfil;
-        this.nombreUsuario = nbUsuario;
-        this.fechaHoraLogin = fhLogin;
-        this.estado = stEstado;
-    }
-
-    public Integer getCdLogin() {
+    public Integer getId() {
         return id;
     }
 
-    public void setCdLogin(Integer cdLogin) {
-        this.id = cdLogin;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getCdOficina() {
+    public String getIdOficina() {
         return idOficina;
     }
 
-    public void setCdOficina(String cdOficina) {
-        this.idOficina = cdOficina;
+    public void setIdOficina(String idOficina) {
+        this.idOficina = idOficina;
     }
 
-    public String getNbServidor() {
+    public String getNombreServidor() {
         return nombreServidor;
     }
 
-    public void setNbServidor(String nbServidor) {
-        this.nombreServidor = nbServidor;
+    public void setNombreServidor(String nombreServidor) {
+        this.nombreServidor = nombreServidor;
     }
 
-    public String getNuPuesto() {
+    public String getNumeroPuesto() {
         return numeroPuesto;
     }
 
-    public void setNuPuesto(String nuPuesto) {
-        this.numeroPuesto = nuPuesto;
+    public void setNumeroPuesto(String numeroPuesto) {
+        this.numeroPuesto = numeroPuesto;
     }
 
-    public String getCdRegistro() {
+    public String getIdRegistro() {
         return idRegistro;
     }
 
-    public void setCdRegistro(String cdRegistro) {
-        this.idRegistro = cdRegistro;
+    public void setIdRegistro(String idRegistro) {
+        this.idRegistro = idRegistro;
     }
 
-    public String getCdPerfil() {
+    public String getIdPerfil() {
         return idPerfil;
     }
 
-    public void setCdPerfil(String cdPerfil) {
-        this.idPerfil = cdPerfil;
+    public void setIdPerfil(String idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
-    public String getNbUsuario() {
+    public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-    public void setNbUsuario(String nbUsuario) {
-        this.nombreUsuario = nbUsuario;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public Date getFhLogin() {
+    public Date getFechaHoraLogin() {
         return fechaHoraLogin;
     }
 
-    public void setFhLogin(Date fhLogin) {
-        this.fechaHoraLogin = fhLogin;
+    public void setFechaHoraLogin(Date fechaHoraLogin) {
+        this.fechaHoraLogin = fechaHoraLogin;
     }
 
-    public Date getFhCreacion() {
+    public Date getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
-    public void setFhCreacion(Date fhCreacion) {
-        this.fechaHoraCreacion = fhCreacion;
+    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+        this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
-    public Date getFhModificacion() {
+    public Date getFechaHoraModificacion() {
         return fechaHoraModificacion;
     }
 
-    public void setFhModificacion(Date fhModificacion) {
-        this.fechaHoraModificacion = fhModificacion;
+    public void setFechaHoraModificacion(Date fechaHoraModificacion) {
+        this.fechaHoraModificacion = fechaHoraModificacion;
     }
 
-    public String getCdUsuCrea() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setCdUsuCrea(String cdUsuCrea) {
-        this.usuarioCreacion = cdUsuCrea;
+    public void setUsuarioCreacion(String usuarioCreacion) {
+        this.usuarioCreacion = usuarioCreacion;
     }
 
-    public String getCdUsuModi() {
+    public String getUsuarioModificacion() {
         return usuarioModificacion;
     }
 
-    public void setCdUsuModi(String cdUsuModi) {
-        this.usuarioModificacion = cdUsuModi;
+    public void setUsuarioModificacion(String usuarioModificacion) {
+        this.usuarioModificacion = usuarioModificacion;
     }
 
-    public BigInteger getStEstado() {
+    public BigInteger getEstado() {
         return estado;
     }
 
-    public void setStEstado(BigInteger stEstado) {
-        this.estado = stEstado;
+    public void setEstado(BigInteger estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -230,5 +227,5 @@ public class Login implements Serializable {
     public String toString() {
         return "com.bbva.admbio.model.Login[ cdLogin=" + id + " ]";
     }
-    
+
 }
