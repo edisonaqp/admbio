@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/web-bbva"/>
+<Context antiJARLocking="true" path="/web-bbva">
+    
+    <Resource name="jdbc/gwybio" auth="Container" type="javax.sql.DataSource"
+            maxActive="50" maxIdle="30" maxWait="10000"
+            username="gwybio" password="gwybio" 
+            driverClassName="oracle.jdbc.OracleDriver"
+            url="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+
+</Context>

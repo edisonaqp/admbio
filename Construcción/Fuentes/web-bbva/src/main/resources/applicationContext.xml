@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   
+						http://www.springframework.org/schema/beans/spring-beans.xsd  
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/context   
+						http://www.springframework.org/schema/context/spring-context.xsd
+				        http://www.springframework.org/schema/tx
+				        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="pe.com.bbva.admbio.control" />
+
+    <context:annotation-config />
+
+    <!-- Enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- 	<bean id="dataSource" -->
+    <!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+    <!-- 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" /> -->
+    <!-- 		<property name="url" value="jdbc:oracle:thin:@10.10.1.248:1521:xe" /> -->
+    <!-- 		<property name="username" value="efycap" /> -->
+    <!-- 		<property name="password" value="123456" /> -->
+    <!-- 	</bean> -->
+
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <!--<property name="jndiName" value="jdbc/gwybio" />-->
+        <property name="jndiName" value="java:comp/env/jdbc/gwybio" />
+        <property name="lookupOnStartup" value="false" />
+        <property name="cache" value="true" />
+        <property name="proxyInterface" value="javax.sql.DataSource" />
+    </bean>
+ 	
+    <bean id="sessionFactory"
+              class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="pe.com.bbva.admbio.model" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+
+    <bean id="transactionManager"
+              class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:hibernate.properties</value>
+                <!--<value>classpath:pe21.properties</value>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="log4jInitialization"
+              class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+        <property name="targetMethod" value="initLogging" />
+        <property name="arguments">
+            <list>
+                <value>classpath:log4j.properties</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>  

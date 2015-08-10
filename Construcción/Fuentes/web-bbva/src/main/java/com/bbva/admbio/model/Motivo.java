@@ -31,55 +31,74 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Motivo.findByNbMnemo", query = "SELECT m FROM Motivo m WHERE m.nbMnemo = :nbMnemo"),
     @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion")})
 public class Motivo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "CD_MOTIVO")
-    private Integer cdMotivo;
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "NB_MNEMO")
-    private String nbMnemo;
+    private String mnemo;
     @Basic(optional = false)
     @Column(name = "NB_DESCRIPCION")
-    private String nbDescripcion;
+    private String descripcion;
     @OneToMany(mappedBy = "cdMotivo")
     private List<TerminalInactivo> terminalInactivoList;
 
     public Motivo() {
     }
 
-    public Motivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+    public Motivo(Integer id) {
+        this.id = id;
     }
 
-    public Motivo(Integer cdMotivo, String nbMnemo, String nbDescripcion) {
-        this.cdMotivo = cdMotivo;
-        this.nbMnemo = nbMnemo;
-        this.nbDescripcion = nbDescripcion;
+    public Motivo(Integer id, String mnemo, String descripcion) {
+        this.id = id;
+        this.mnemo = mnemo;
+        this.descripcion = descripcion;
     }
 
-    public Integer getCdMotivo() {
-        return cdMotivo;
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
     }
 
-    public void setCdMotivo(Integer cdMotivo) {
-        this.cdMotivo = cdMotivo;
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getNbMnemo() {
-        return nbMnemo;
+    /**
+     * @return the mnemo
+     */
+    public String getMnemo() {
+        return mnemo;
     }
 
-    public void setNbMnemo(String nbMnemo) {
-        this.nbMnemo = nbMnemo;
+    /**
+     * @param mnemo the mnemo to set
+     */
+    public void setMnemo(String mnemo) {
+        this.mnemo = mnemo;
     }
 
-    public String getNbDescripcion() {
-        return nbDescripcion;
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNbDescripcion(String nbDescripcion) {
-        this.nbDescripcion = nbDescripcion;
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @XmlTransient
@@ -94,7 +113,7 @@ public class Motivo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cdMotivo != null ? cdMotivo.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +124,7 @@ public class Motivo implements Serializable {
             return false;
         }
         Motivo other = (Motivo) object;
-        if ((this.cdMotivo == null && other.cdMotivo != null) || (this.cdMotivo != null && !this.cdMotivo.equals(other.cdMotivo))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -113,7 +132,6 @@ public class Motivo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + cdMotivo + " ]";
+        return "com.bbva.admbio.model.Motivo[ id=" + id + " ]";
     }
-    
 }
