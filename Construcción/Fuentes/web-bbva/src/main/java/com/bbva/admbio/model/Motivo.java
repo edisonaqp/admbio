@@ -48,13 +48,6 @@ public class Motivo implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(name = "NB_MNEMO")
-<<<<<<< HEAD
-    private String mnemo;
-    @Basic(optional = false)
-    @Column(name = "NB_DESCRIPCION")
-    private String descripcion;
-    @OneToMany(mappedBy = "cdMotivo")
-=======
     private String mnemonico;
     @Basic(optional = false)
     @Column(name = "NB_DESCRIPCION")
@@ -73,73 +66,20 @@ public class Motivo implements Serializable {
     @Column(name = "ST_ESTADO")
     private BigInteger estado;
     @OneToMany(mappedBy = "motivo")
->>>>>>> origin/master
     private List<TerminalInactivo> terminalInactivoList;
 
     public Motivo() {
     }
 
-<<<<<<< HEAD
     public Motivo(Integer id) {
         this.id = id;
     }
 
-    public Motivo(Integer id, String mnemo, String descripcion) {
+    public Motivo(Integer id, String mnemonico, String descripcion, BigInteger estado) {
         this.id = id;
-        this.mnemo = mnemo;
+        this.mnemonico = mnemonico;
         this.descripcion = descripcion;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the mnemo
-     */
-    public String getMnemo() {
-        return mnemo;
-    }
-
-    /**
-     * @param mnemo the mnemo to set
-     */
-    public void setMnemo(String mnemo) {
-        this.mnemo = mnemo;
-    }
-
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-=======
-    public Motivo(Integer cdMotivo) {
-        this.id = cdMotivo;
-    }
-
-    public Motivo(Integer cdMotivo, String nbMnemo, String nbDescripcion, BigInteger stEstado) {
-        this.id = cdMotivo;
-        this.mnemonico = nbMnemo;
-        this.descripcion = nbDescripcion;
-        this.estado = stEstado;
+        this.estado = estado;
     }
 
     public Integer getCdMotivo() {
@@ -204,7 +144,6 @@ public class Motivo implements Serializable {
 
     public void setStEstado(BigInteger stEstado) {
         this.estado = stEstado;
->>>>>>> origin/master
     }
 
     @XmlTransient
@@ -238,10 +177,6 @@ public class Motivo implements Serializable {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
         return "com.bbva.admbio.model.Motivo[ id=" + id + " ]";
-=======
-        return "com.bbva.admbio.model.Motivo[ cdMotivo=" + id + " ]";
->>>>>>> origin/master
     }
 }
