@@ -8,18 +8,14 @@ package com.bbva.admbio.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,41 +23,24 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TBI002_TERM_INACT")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TerminalInactivo.findAll", query = "SELECT t FROM TerminalInactivo t"),
-    @NamedQuery(name = "TerminalInactivo.findByCdTermInactivo", query = "SELECT t FROM TerminalInactivo t WHERE t.cdTermInactivo = :cdTermInactivo"),
-    @NamedQuery(name = "TerminalInactivo.findByCdServidor", query = "SELECT t FROM TerminalInactivo t WHERE t.cdServidor = :cdServidor"),
-    @NamedQuery(name = "TerminalInactivo.findByCdPuesto", query = "SELECT t FROM TerminalInactivo t WHERE t.cdPuesto = :cdPuesto"),
-    @NamedQuery(name = "TerminalInactivo.findByFhFechaInicio", query = "SELECT t FROM TerminalInactivo t WHERE t.fhFechaInicio = :fhFechaInicio"),
-    @NamedQuery(name = "TerminalInactivo.findByFhFechaFin", query = "SELECT t FROM TerminalInactivo t WHERE t.fhFechaFin = :fhFechaFin"),
-    @NamedQuery(name = "TerminalInactivo.findByTxComentarios", query = "SELECT t FROM TerminalInactivo t WHERE t.txComentarios = :txComentarios"),
-    @NamedQuery(name = "TerminalInactivo.findByFhCreacion", query = "SELECT t FROM TerminalInactivo t WHERE t.fhCreacion = :fhCreacion"),
-    @NamedQuery(name = "TerminalInactivo.findByFhModificacion", query = "SELECT t FROM TerminalInactivo t WHERE t.fhModificacion = :fhModificacion"),
-    @NamedQuery(name = "TerminalInactivo.findByCdUsuCrea", query = "SELECT t FROM TerminalInactivo t WHERE t.cdUsuCrea = :cdUsuCrea"),
-    @NamedQuery(name = "TerminalInactivo.findByCdUsuModi", query = "SELECT t FROM TerminalInactivo t WHERE t.cdUsuModi = :cdUsuModi"),
-    @NamedQuery(name = "TerminalInactivo.findByStEstado", query = "SELECT t FROM TerminalInactivo t WHERE t.stEstado = :stEstado")})
-public class TerminalInactivo implements Serializable {
+public class Terminal implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @Column(name = "CD_TERM_INACTIVO")
+    @Column(name = "CD_TERM_INACT")
     private Integer id;
-    @Basic(optional = false)
+    @Column(name = "CD_TERMINAL")
+    private String terminal;
     @Column(name = "CD_SERVIDOR")
-    private String idServidor;
-    @Basic(optional = false)
+    private String servidor;
     @Column(name = "CD_PUESTO")
-    private String idPuesto;
-    @Basic(optional = false)
+    private String puesto;
     @Column(name = "FH_FECHA_INICIO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraInicio;
-    @Basic(optional = false)
     @Column(name = "FH_FECHA_FIN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraFin;
-    @Basic(optional = false)
     @Column(name = "TX_COMENTARIOS")
     private String textoComentarios;
     @Column(name = "FH_CREACION")
@@ -74,20 +53,21 @@ public class TerminalInactivo implements Serializable {
     private String usuarioCreacion;
     @Column(name = "CD_USU_MODI")
     private String usuarioModificacion;
-    @Basic(optional = false)
     @Column(name = "ST_ESTADO")
     private BigInteger estado;
     @JoinColumn(name = "CD_MOTIVO", referencedColumnName = "CD_MOTIVO")
     @ManyToOne
     private Motivo motivo;
+    @Column(name = "CD_CENTRO_COSTO")
+    private String centroCosto;
 
-    public TerminalInactivo() {
+    public Terminal() {
     }
 
-    public TerminalInactivo(Integer id, String idServidor, String idPuesto, Date fechaHoraInicio, Date fechaHoraFin, String textoComentarios, BigInteger estado, Motivo motivo) {
+    public Terminal(Integer id, String servidor, String puesto, Date fechaHoraInicio, Date fechaHoraFin, String textoComentarios, BigInteger estado, Motivo motivo) {
         this.id = id;
-        this.idServidor = idServidor;
-        this.idPuesto = idPuesto;
+        this.servidor = servidor;
+        this.puesto = puesto;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
         this.textoComentarios = textoComentarios;
@@ -103,20 +83,28 @@ public class TerminalInactivo implements Serializable {
         this.id = id;
     }
 
-    public String getIdServidor() {
-        return idServidor;
+    public String getTerminal() {
+        return terminal;
     }
 
-    public void setIdServidor(String idServidor) {
-        this.idServidor = idServidor;
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
     }
 
-    public String getIdPuesto() {
-        return idPuesto;
+    public String getServidor() {
+        return servidor;
     }
 
-    public void setIdPuesto(String idPuesto) {
-        this.idPuesto = idPuesto;
+    public void setServidor(String servidor) {
+        this.servidor = servidor;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 
     public Date getFechaHoraInicio() {
@@ -191,7 +179,14 @@ public class TerminalInactivo implements Serializable {
         this.motivo = motivo;
     }
 
-    
+    public String getCentroCosto() {
+        return centroCosto;
+    }
+
+    public void setCentroCosto(String centroCosto) {
+        this.centroCosto = centroCosto;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -202,10 +197,10 @@ public class TerminalInactivo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TerminalInactivo)) {
+        if (!(object instanceof Terminal)) {
             return false;
         }
-        TerminalInactivo other = (TerminalInactivo) object;
+        Terminal other = (Terminal) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -216,5 +211,5 @@ public class TerminalInactivo implements Serializable {
     public String toString() {
         return "com.bbva.admbio.model.TerminalInactivo[ cdTermInactivo=" + id + " ]";
     }
-    
+
 }

@@ -9,17 +9,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -28,28 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "TBI003_MOTIVO")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Motivo.findAll", query = "SELECT m FROM Motivo m"),
-    @NamedQuery(name = "Motivo.findByCdMotivo", query = "SELECT m FROM Motivo m WHERE m.cdMotivo = :cdMotivo"),
-    @NamedQuery(name = "Motivo.findByNbMnemo", query = "SELECT m FROM Motivo m WHERE m.nbMnemo = :nbMnemo"),
-    @NamedQuery(name = "Motivo.findByNbDescripcion", query = "SELECT m FROM Motivo m WHERE m.nbDescripcion = :nbDescripcion"),
-    @NamedQuery(name = "Motivo.findByFhCreacion", query = "SELECT m FROM Motivo m WHERE m.fhCreacion = :fhCreacion"),
-    @NamedQuery(name = "Motivo.findByFhModificacion", query = "SELECT m FROM Motivo m WHERE m.fhModificacion = :fhModificacion"),
-    @NamedQuery(name = "Motivo.findByCdUsuCrea", query = "SELECT m FROM Motivo m WHERE m.cdUsuCrea = :cdUsuCrea"),
-    @NamedQuery(name = "Motivo.findByCdUsuModi", query = "SELECT m FROM Motivo m WHERE m.cdUsuModi = :cdUsuModi"),
-    @NamedQuery(name = "Motivo.findByStEstado", query = "SELECT m FROM Motivo m WHERE m.stEstado = :stEstado")})
 public class Motivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "CD_MOTIVO")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "NB_MNEMO")
     private String mnemonico;
-    @Basic(optional = false)
     @Column(name = "NB_DESCRIPCION")
     private String descripcion;
     @Column(name = "FH_CREACION")
@@ -62,11 +44,10 @@ public class Motivo implements Serializable {
     private String usuarioCreacion;
     @Column(name = "CD_USU_MODI")
     private String usuarioModificacion;
-    @Basic(optional = false)
     @Column(name = "ST_ESTADO")
     private BigInteger estado;
     @OneToMany(mappedBy = "motivo")
-    private List<TerminalInactivo> terminalInactivoList;
+    private List<Terminal> terminalInactivoList;
 
     public Motivo() {
     }
@@ -147,11 +128,11 @@ public class Motivo implements Serializable {
     }
 
     @XmlTransient
-    public List<TerminalInactivo> getTerminalInactivoList() {
+    public List<Terminal> getTerminalInactivoList() {
         return terminalInactivoList;
     }
 
-    public void setTerminalInactivoList(List<TerminalInactivo> terminalInactivoList) {
+    public void setTerminalInactivoList(List<Terminal> terminalInactivoList) {
         this.terminalInactivoList = terminalInactivoList;
     }
 

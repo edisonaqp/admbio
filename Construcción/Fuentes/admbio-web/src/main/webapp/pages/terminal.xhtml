@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:composition template="/plantillas/plantilla.xhtml">
+        <ui:define name="cabecera">
+            <script type="text/javascript">
+            </script>
+        </ui:define>
+
+        <ui:define name="contenido">
+            <p:panel header="Terminales Deshabilitados" id="pnlTerminal">
+                <p:separator />
+                <h:outputText value="" />
+                <h:form>
+                    <p:dataTable id="tablaTerminales"
+                                 value="#{terminalMB.lTerminal}" var="terminal"
+                                 paginator="true" rows="10" paginatorPosition="bottom" 
+                                 currentPageReportTemplate="{currentPage} de {totalPages}"
+                                 emptyMessage="No se encontraron registros"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                        <p:column headerText="Oficina">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.centroCosto}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.centroCosto}" readonly="true" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Terminal">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.id}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.id}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{terminal.fechaHoraFin}">
+                                <f:convertDateTime type="date" pattern="dd-MM-yyyy"></f:convertDateTime>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{terminal.estado}" />
+                        </p:column>
+
+                        <p:dialog widgetVar="dlgLoading" resizable="false"
+                                  showEffect="fade" hideEffect="fade" modal="true"
+                                  appendTo="@(body)">
+                            <p:outputPanel>
+                                <h:outputText value="" />
+                            </p:outputPanel>
+                        </p:dialog>
+                    </p:dataTable>
+
+                    <p:commandButton id="grabar" value="Grabar" action="#{loginMB.grabar}" ajax="false"/>
+                    <p:commandButton id="resBtn" value="Añadir" style="width:110px"
+                                     onstart="dlgLoading.show()" update="resServDeu" oncomplete="dlgLoading.hide();"/>
+
+                    <p:dialog id="resServDeu" for="resBtn" header="Deshabilitar Terminal Biométrico"
+                              widgetVar="resServDeuDialog" modal="true" closable="true" visible="#{serDeudaMB.cuadroResumen}">
+                        <p:panelGrid>
+                            <p:dataTable id="tablaLogin"
+                                         value="#{terminalMB.lLogin}" var="terminal"
+                                         paginator="true" rows="10" paginatorPosition="bottom" 
+                                         currentPageReportTemplate="{currentPage} de {totalPages}"
+                                         emptyMessage="No se encontraron registros"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                                <p:column headerText="Oficina">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{terminal.centroCosto}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{terminal.centroCosto}" readonly="true" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Servidor">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{terminal.nombreServidor}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{terminal.nombreServidor}" readonly="true" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Puesto">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{terminal.numeroPuesto}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{terminal.numeroPuesto}" readonly="true" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Usuario">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{terminal.id}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{terminal.id}" readonly="true" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column headerText="Nombre">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{terminal.nombreUsuario}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <p:inputText value="#{terminal.nombreUsuario}" readonly="true" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:dialog widgetVar="dlgLoading" resizable="false"
+                                          showEffect="fade" hideEffect="fade" modal="true"
+                                          appendTo="@(body)">
+                                    <p:outputPanel>
+                                        <h:outputText value="" />
+                                    </p:outputPanel>
+                                </p:dialog>
+                            </p:dataTable>
+                        </p:panelGrid>
+
+
+                    </p:dialog>
+
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>   
+</html>

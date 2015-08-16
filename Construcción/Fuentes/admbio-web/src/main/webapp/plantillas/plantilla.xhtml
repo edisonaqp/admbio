@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>EFYCAP</title>
+        <title>AdmBio</title>
 
         <h:outputStylesheet library="css" name="fonts.css" />
         <h:outputStylesheet library="css" name="primefaces.css" />
@@ -48,7 +48,7 @@
                                     <!-- 								<h:commandButton title="Desconectar" value="Desconectar" onclick="deslogueo()" type="button"/> -->
                                 </h:form>
                             </h:panelGrid>
-                            <h:outputText class="producto" value="proyecta" />
+                            <h:outputText class="producto" value="AdmBiometria" />
                         </h:panelGrid>
                     </h:panelGrid>
                 </div>
@@ -56,17 +56,31 @@
                 <div id="menubar">
                     <h:form id="formMenuBar">
                         <p:menubar id="menuOpc" >
-                            <p:submenu id="opcAdmin" label="Administración" icon="ui-icon-wrench" >
+                            <p:submenu id="opcHome" label="Home" icon="ui-icon-home" >
                                 <p:menuitem>
                                     <h:commandLink value="Parámetros" type="button"
-                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemPar"
+                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemPar"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                </p:menuitem>
+                            </p:submenu>
+                            
+                            <p:submenu id="opcTerminales" label="Terminales" icon="ui-icon-terminal" >
+                                <p:menuitem>
+                                    <h:commandLink value="Deshabilitar" type="button"
+                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemDeshabil"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                    <h:commandLink value="Consultar" type="button"
+                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemConsulta"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                    <h:commandLink value="Consulta Historica" type="button"
+                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemConsultaHistorica"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                 </p:menuitem>
                             </p:submenu>
 
-                            <p:submenu id="opcProy" label="Proyecciones" icon="ui-icon-gear">
+                            <p:submenu id="opcServidores" label="Servidores" icon="ui-icon-server">
                                 <p:menuitem>
-                                    <h:commandLink value="Nueva" type="button"
+                                    <h:commandLink value="Asociar" type="button"
                                                    action="/pages/procesar-rating.jsf?faces-redirect=true"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff"
                                                    id="itemNue" />
@@ -75,9 +89,21 @@
                                 <p:menuitem>
                                     <h:commandLink value="Consultar" type="button"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff"
-                                                   action="/pages/consulta-simulaciones.jsf?faces-redirect=true" id="itemCon" />
+                                                   action="/pages/servidor.jsf?faces-redirect=true" id="itemCon" />
                                 </p:menuitem>
                             </p:submenu>
+                            
+                            <p:submenu id="opcClientes" label="Clientes" icon="ui-icon-client" >
+                                <p:menuitem>
+                                    <h:commandLink value="Depurar" type="button"
+                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemDepurar"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                    <h:commandLink value="Consultar" type="button"
+                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemConsultar"
+                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
+                                </p:menuitem>
+                            </p:submenu>
+                            
                         </p:menubar>
 
                     </h:form>

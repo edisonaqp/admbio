@@ -8,16 +8,12 @@ package com.bbva.admbio.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,48 +21,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TBI001_LOGIN")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Login.findAll", query = "SELECT l FROM Login l"),
-    @NamedQuery(name = "Login.findByCdLogin", query = "SELECT l FROM Login l WHERE l.cdLogin = :cdLogin"),
-    @NamedQuery(name = "Login.findByCdOficina", query = "SELECT l FROM Login l WHERE l.cdOficina = :cdOficina"),
-    @NamedQuery(name = "Login.findByNbServidor", query = "SELECT l FROM Login l WHERE l.nbServidor = :nbServidor"),
-    @NamedQuery(name = "Login.findByNuPuesto", query = "SELECT l FROM Login l WHERE l.nuPuesto = :nuPuesto"),
-    @NamedQuery(name = "Login.findByCdRegistro", query = "SELECT l FROM Login l WHERE l.cdRegistro = :cdRegistro"),
-    @NamedQuery(name = "Login.findByCdPerfil", query = "SELECT l FROM Login l WHERE l.cdPerfil = :cdPerfil"),
-    @NamedQuery(name = "Login.findByNbUsuario", query = "SELECT l FROM Login l WHERE l.nbUsuario = :nbUsuario"),
-    @NamedQuery(name = "Login.findByFhLogin", query = "SELECT l FROM Login l WHERE l.fhLogin = :fhLogin"),
-    @NamedQuery(name = "Login.findByFhCreacion", query = "SELECT l FROM Login l WHERE l.fhCreacion = :fhCreacion"),
-    @NamedQuery(name = "Login.findByFhModificacion", query = "SELECT l FROM Login l WHERE l.fhModificacion = :fhModificacion"),
-    @NamedQuery(name = "Login.findByCdUsuCrea", query = "SELECT l FROM Login l WHERE l.cdUsuCrea = :cdUsuCrea"),
-    @NamedQuery(name = "Login.findByCdUsuModi", query = "SELECT l FROM Login l WHERE l.cdUsuModi = :cdUsuModi"),
-    @NamedQuery(name = "Login.findByStEstado", query = "SELECT l FROM Login l WHERE l.stEstado = :stEstado")})
 public class Login implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "CD_LOGIN")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "CD_OFICINA")
-    private String idOficina;
-    @Basic(optional = false)
+    @Column(name = "CD_CENTRO_COSTO")
+    private String centroCosto;
+    @Column(name = "CD_TERMINAL")
+    private String terminal;
     @Column(name = "NB_SERVIDOR")
     private String nombreServidor;
-    @Basic(optional = false)
     @Column(name = "NU_PUESTO")
     private String numeroPuesto;
-    @Basic(optional = false)
     @Column(name = "CD_REGISTRO")
-    private String idRegistro;
-    @Basic(optional = false)
+    private String registro;
     @Column(name = "CD_PERFIL")
-    private String idPerfil;
-    @Basic(optional = false)
+    private String perfil;
     @Column(name = "NB_USUARIO")
     private String nombreUsuario;
-    @Basic(optional = false)
     @Column(name = "FH_LOGIN")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraLogin;
@@ -80,20 +54,19 @@ public class Login implements Serializable {
     private String usuarioCreacion;
     @Column(name = "CD_USU_MODI")
     private String usuarioModificacion;
-    @Basic(optional = false)
     @Column(name = "ST_ESTADO")
     private BigInteger estado;
 
     public Login() {
     }
 
-    public Login(Integer id, String idOficina, String nombreServidor, String numeroPuesto, String idRegistro, String idPerfil, String nombreUsuario, Date fechaHoraLogin, BigInteger estado) {
+    public Login(Integer id, String centroCosto, String nombreServidor, String numeroPuesto, String registro, String perfil, String nombreUsuario, Date fechaHoraLogin, BigInteger estado) {
         this.id = id;
-        this.idOficina = idOficina;
+        this.centroCosto = centroCosto;
         this.nombreServidor = nombreServidor;
         this.numeroPuesto = numeroPuesto;
-        this.idRegistro = idRegistro;
-        this.idPerfil = idPerfil;
+        this.registro = registro;
+        this.perfil = perfil;
         this.nombreUsuario = nombreUsuario;
         this.fechaHoraLogin = fechaHoraLogin;
         this.estado = estado;
@@ -105,14 +78,6 @@ public class Login implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getIdOficina() {
-        return idOficina;
-    }
-
-    public void setIdOficina(String idOficina) {
-        this.idOficina = idOficina;
     }
 
     public String getNombreServidor() {
@@ -129,22 +94,6 @@ public class Login implements Serializable {
 
     public void setNumeroPuesto(String numeroPuesto) {
         this.numeroPuesto = numeroPuesto;
-    }
-
-    public String getIdRegistro() {
-        return idRegistro;
-    }
-
-    public void setIdRegistro(String idRegistro) {
-        this.idRegistro = idRegistro;
-    }
-
-    public String getIdPerfil() {
-        return idPerfil;
-    }
-
-    public void setIdPerfil(String idPerfil) {
-        this.idPerfil = idPerfil;
     }
 
     public String getNombreUsuario() {
@@ -201,6 +150,38 @@ public class Login implements Serializable {
 
     public void setEstado(BigInteger estado) {
         this.estado = estado;
+    }
+
+    public String getCentroCosto() {
+        return centroCosto;
+    }
+
+    public void setCentroCosto(String centroCosto) {
+        this.centroCosto = centroCosto;
+    }
+
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
+    }
+
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     @Override

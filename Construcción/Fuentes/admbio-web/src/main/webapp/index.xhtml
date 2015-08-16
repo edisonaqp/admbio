@@ -20,6 +20,9 @@
             <p:panel header="Hello BBVA" id="pnlBuscarCliente">
                 <p:separator />
                 <h:outputText value="BBVA Content" />
+                <h:form>
+                    <p:commandButton id="grabar" value="Grabar" action="#{loginMB.grabar}" ajax="false"/>
+                </h:form>
             </p:panel>
         </ui:define>
     </ui:composition>

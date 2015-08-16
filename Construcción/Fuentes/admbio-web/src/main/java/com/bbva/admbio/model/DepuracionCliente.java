@@ -8,16 +8,12 @@ package com.bbva.admbio.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,36 +21,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TBI006_DEPURACION_CLI")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "DepuracionCliente.findAll", query = "SELECT d FROM DepuracionCliente d"),
-    @NamedQuery(name = "DepuracionCliente.findByCdDepuracionCliente", query = "SELECT d FROM DepuracionCliente d WHERE d.cdDepuracionCliente = :cdDepuracionCliente"),
-    @NamedQuery(name = "DepuracionCliente.findByFhEjecucion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhEjecucion = :fhEjecucion"),
-    @NamedQuery(name = "DepuracionCliente.findByCtIncial", query = "SELECT d FROM DepuracionCliente d WHERE d.ctIncial = :ctIncial"),
-    @NamedQuery(name = "DepuracionCliente.findByCtFinal", query = "SELECT d FROM DepuracionCliente d WHERE d.ctFinal = :ctFinal"),
-    @NamedQuery(name = "DepuracionCliente.findByCtDepurados", query = "SELECT d FROM DepuracionCliente d WHERE d.ctDepurados = :ctDepurados"),
-    @NamedQuery(name = "DepuracionCliente.findByFhCreacion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhCreacion = :fhCreacion"),
-    @NamedQuery(name = "DepuracionCliente.findByFhModificacion", query = "SELECT d FROM DepuracionCliente d WHERE d.fhModificacion = :fhModificacion"),
-    @NamedQuery(name = "DepuracionCliente.findByCdUsuCrea", query = "SELECT d FROM DepuracionCliente d WHERE d.cdUsuCrea = :cdUsuCrea"),
-    @NamedQuery(name = "DepuracionCliente.findByCdUsuModi", query = "SELECT d FROM DepuracionCliente d WHERE d.cdUsuModi = :cdUsuModi"),
-    @NamedQuery(name = "DepuracionCliente.findByStEstado", query = "SELECT d FROM DepuracionCliente d WHERE d.stEstado = :stEstado")})
 public class DepuracionCliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "CD_DEPURACION_CLIENTE")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "FH_EJECUCION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraEjecucion;
-    @Basic(optional = false)
     @Column(name = "CT_INCIAL")
     private BigInteger cantidadIncial;
-    @Basic(optional = false)
     @Column(name = "CT_FINAL")
     private BigInteger cantidadFinal;
-    @Basic(optional = false)
     @Column(name = "CT_DEPURADOS")
     private BigInteger cantidadDepurados;
     @Column(name = "FH_CREACION")
@@ -67,7 +46,6 @@ public class DepuracionCliente implements Serializable {
     private String usuarioCreador;
     @Column(name = "CD_USU_MODI")
     private String usuarioModificador;
-    @Basic(optional = false)
     @Column(name = "ST_ESTADO")
     private BigInteger estado;
 
@@ -166,8 +144,7 @@ public class DepuracionCliente implements Serializable {
     public void setEstado(BigInteger estado) {
         this.estado = estado;
     }
-   
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -192,5 +169,5 @@ public class DepuracionCliente implements Serializable {
     public String toString() {
         return "com.bbva.admbio.model.DepuracionCliente[ cdDepuracionCliente=" + id + " ]";
     }
-    
+
 }

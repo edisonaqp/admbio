@@ -8,16 +8,12 @@ package com.bbva.admbio.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,28 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TBI004_ESTADO_CLI")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "EstadoCliente.findAll", query = "SELECT e FROM EstadoCliente e"),
-    @NamedQuery(name = "EstadoCliente.findByCdEstadoCli", query = "SELECT e FROM EstadoCliente e WHERE e.cdEstadoCli = :cdEstadoCli"),
-    @NamedQuery(name = "EstadoCliente.findByCdTipoDoc", query = "SELECT e FROM EstadoCliente e WHERE e.cdTipoDoc = :cdTipoDoc"),
-    @NamedQuery(name = "EstadoCliente.findByNuNumeroDocumento", query = "SELECT e FROM EstadoCliente e WHERE e.nuNumeroDocumento = :nuNumeroDocumento"),
-    @NamedQuery(name = "EstadoCliente.findByStIndicadorPdp", query = "SELECT e FROM EstadoCliente e WHERE e.stIndicadorPdp = :stIndicadorPdp")})
-
 public class EstadoCliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "CD_ESTADO_CLI")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "CD_TIPO_DOC")
-    private String idTipoDocumento;
-    @Basic(optional = false)
+    private String tipoDocumento;
     @Column(name = "NU_NUMERO_DOCUMENTO")
     private String numeroDocumento;
-    @Basic(optional = false)
     @Column(name = "ST_INDICADOR_PDP")
     private BigInteger estadoIndicadorPdp;
     @Column(name = "FH_CREACION")
@@ -63,9 +47,9 @@ public class EstadoCliente implements Serializable {
     public EstadoCliente() {
     }
 
-    public EstadoCliente(Integer id, String idTipoDocumento, String numeroDocumento, BigInteger estadoIndicadorPdp) {
+    public EstadoCliente(Integer id, String tipoDocumento, String numeroDocumento, BigInteger estadoIndicadorPdp) {
         this.id = id;
-        this.idTipoDocumento = idTipoDocumento;
+        this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
         this.estadoIndicadorPdp = estadoIndicadorPdp;
     }
@@ -78,12 +62,12 @@ public class EstadoCliente implements Serializable {
         this.id = id;
     }
 
-    public String getIdTipoDocumento() {
-        return idTipoDocumento;
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public void setIdTipoDocumento(String idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 
     public String getNumeroDocumento() {

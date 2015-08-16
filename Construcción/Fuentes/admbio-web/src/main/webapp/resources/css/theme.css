@@ -22,7 +22,7 @@ a {
 	color: #0094e5;
 	text-decoration: none;
 	line-height: 1.8em;
-	¡important
+	ï¿½important
 }
 
 .ui-state-focus {	
@@ -41,20 +41,20 @@ a {
 
 .ui-state-active a,.ui-state-active a:link,.ui-state-active a:visited {
 	color: #003d91;
-	¡important
+	ï¿½important
 }
 /* Interaction Cues----------------------------------*/
 .ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight
 	{
 	color: #003D91;
 	background: #e2fafe;
-	¡important
+	ï¿½important
 }
 
 .ui-state-highlight a,.ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a
 	{
 	color: #003D91;
-	¡important
+	ï¿½important
 }
 
 .ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error
@@ -147,7 +147,7 @@ a {
 .ui-icon-triangle-1-e {
 	background: url("#{resource['images/arrow-down.png']}") no-repeat center;
 	/*margin-top: 5px;*/
-	¡important
+	ï¿½important
 }
 
 .ui-icon-triangle-1-se {
@@ -156,7 +156,7 @@ a {
 
 .ui-icon-triangle-1-s {
 	background: url("#{resource['images/arrow-drop.png']}") no-repeat center;
-	¡important
+	ï¿½important
 }
 
 .ui-icon-triangle-1-sw {
@@ -555,14 +555,41 @@ a {
 	
 }
 
-.ui-icon-wrench {
-	background: url("#{resource['images/ico-admin.png']}") no-repeat center
+.ui-icon-home {
+	background: url("#{resource['images/ico-home.png']}") no-repeat center
 		!important;
-	height: 18px;
+	height: 24px;
 	width: 24px;
-	margin-right: 10px
+	margin-right: 10px;
+        margin-top: -4px
 }
 
+.ui-icon-terminal {
+	background: url("#{resource['images/ico-terminal.png']}") no-repeat center
+		!important;
+	height: 24px;
+	width: 24px;
+	margin-right: 10px;
+        margin-top: -4px
+}
+
+.ui-icon-server {
+	background: url("#{resource['images/ico-server.png']}") no-repeat center
+		!important;
+	height: 24px;
+	width: 24px;
+	margin-right: 10px;
+        margin-top: -4px
+}
+
+.ui-icon-client {
+	background: url("#{resource['images/ico-client.png']}") no-repeat center
+		!important;
+	height: 24px;
+	width: 24px;
+	margin-right: 10px;
+        margin-top: -4px
+}
 .ui-icon-editar {
 	background: url("#{resource['images/ico-editar.png']}") no-repeat center
 		center !important;
@@ -1145,7 +1172,7 @@ a {
 	-moz-border-radius-topright: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
-	¡important
+	ï¿½important
 }
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected {
