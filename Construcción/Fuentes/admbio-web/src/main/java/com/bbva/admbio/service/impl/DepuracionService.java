@@ -5,8 +5,11 @@
  */
 package com.bbva.admbio.service.impl;
 
+import com.bbva.admbio.dao.IDepuracionDAO;
 import com.bbva.admbio.dao.ILoginDAO;
+import com.bbva.admbio.model.DepuracionCliente;
 import com.bbva.admbio.model.Login;
+import com.bbva.admbio.service.IDepuracionService;
 import com.bbva.admbio.service.ILoginService;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,35 +25,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(readOnly = true)
-public class LoginService implements Serializable, ILoginService {
-
+public class DepuracionService implements Serializable, IDepuracionService {
+    
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private ILoginDAO loginDAO;
+    private IDepuracionDAO depuracionDAO;
 
-    private static final Logger LOGGER = Logger.getLogger(LoginService.class);
+    private static final Logger LOGGER = Logger.getLogger(DepuracionService.class);
 
-    @Transactional(readOnly = false)
-    public boolean guardar(Login login) {
+     public List<DepuracionCliente> listarTodos() {
+        List<DepuracionCliente> lista = new ArrayList<DepuracionCliente>();
         try {
-            loginDAO.guardar(login);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-//            LOGGER.error(Constante.EXECPCION_ENCONTRADA + getClass().getName() + ": " + e.toString(), e);
-            return false;
-        }
-    }
-
-    public List<Login> listarTodos() {
-        List<Login> lista = new ArrayList<Login>();
-        try {
-            lista = loginDAO.buscar();
+            lista = depuracionDAO.buscar();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return lista;
     }
-
 }

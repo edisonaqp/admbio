@@ -48,7 +48,7 @@
                                     <!-- 								<h:commandButton title="Desconectar" value="Desconectar" onclick="deslogueo()" type="button"/> -->
                                 </h:form>
                             </h:panelGrid>
-                            <h:outputText class="producto" value="AdmBiometria" />
+                            <h:outputText class="producto" value="AdmBiométrica" />
                         </h:panelGrid>
                     </h:panelGrid>
                 </div>
@@ -63,7 +63,7 @@
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                 </p:menuitem>
                             </p:submenu>
-                            
+
                             <p:submenu id="opcTerminales" label="Terminales" icon="ui-icon-terminal" >
                                 <p:menuitem>
                                     <h:commandLink value="Deshabilitar" type="button"
@@ -92,18 +92,18 @@
                                                    action="/pages/servidor.jsf?faces-redirect=true" id="itemCon" />
                                 </p:menuitem>
                             </p:submenu>
-                            
+
                             <p:submenu id="opcClientes" label="Clientes" icon="ui-icon-client" >
                                 <p:menuitem>
                                     <h:commandLink value="Depurar" type="button"
                                                    action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemDepurar"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                     <h:commandLink value="Consultar" type="button"
-                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemConsultar"
+                                                   action="/pages/depuracion.jsf?faces-redirect=true" id="itemConsultar"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                 </p:menuitem>
                             </p:submenu>
-                            
+
                         </p:menubar>
 
                     </h:form>

@@ -5,17 +5,14 @@
  */
 package com.bbva.admbio.service;
 
-import com.bbva.admbio.model.Terminal;
+import com.bbva.admbio.model.DepuracionCliente;
 import java.util.List;
 
 /**
  *
  * @author max
  */
-public interface ITerminalService {
-
-    public boolean guardar(Terminal terminal);
-
-    public List<Terminal> listar();
-
+public interface IDepuracionService {
+  
+     public List<DepuracionCliente> listarTodos();
 }

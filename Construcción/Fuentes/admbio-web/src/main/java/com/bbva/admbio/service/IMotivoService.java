@@ -5,17 +5,14 @@
  */
 package com.bbva.admbio.service;
 
-import com.bbva.admbio.model.Terminal;
+import com.bbva.admbio.model.Motivo;
 import java.util.List;
 
 /**
  *
  * @author max
  */
-public interface ITerminalService {
+public interface IMotivoService {
 
-    public boolean guardar(Terminal terminal);
-
-    public List<Terminal> listar();
-
+    public List<Motivo> listarTodos();
 }

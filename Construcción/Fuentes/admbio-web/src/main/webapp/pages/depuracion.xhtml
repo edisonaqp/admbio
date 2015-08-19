@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:composition template="/plantillas/plantilla.xhtml">
+        <ui:define name="cabecera">
+            <script type="text/javascript">
+            </script>
+        </ui:define>
+
+        <ui:define name="contenido">
+            <h:form id="form">
+                <p:panel header="Consulta de Depuracion de Datos" id="pnlCliente">
+                    <p:separator />
+                    <h:panelGrid  columns="5">
+                        <p:outputLabel value="Desde :" />
+                        <p:calendar id="fechaInicio" style="width:10px" value="#{depuracionMB.fechaInicio}" showOn="button" />
+                        <p:outputLabel value="Hasta :" />
+                        <p:calendar id="fechaFin" style="width:10px" value="#{depuracionMB.fechaFin}" showOn="button" />
+                        <p:commandButton id="btnBuscar" value="Buscar" action="#{depuracionMB.buscar}" ajax="false"/>
+                    </h:panelGrid>
+                    <h:outputText value="" />
+                    <h:form id="form">
+                        <p:dataTable id="tablaCliente"
+                                     value="#{depuracionMB.lcliente}" var="cliente"
+                                     paginator="true" rows="10" paginatorPosition="bottom" 
+                                     currentPageReportTemplate="{currentPage} de {totalPages}"
+                                     emptyMessage="No se encontraron registros"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                            <p:column headerText="Cantidad Inicial">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{cliente.cantidadIncial}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{cliente.cantidadIncial}" readonly="true" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Cantidad Final">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{cliente.cantidadFinal}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{cliente.cantidadFinal}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column headerText="Fecha">
+                                <h:outputText value="#{cliente.fechaHoraEjecucion}">
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy"></f:convertDateTime>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Cantidad Depurados">
+                                <h:outputText value="#{cliente.cantidadDepurados}" />
+                            </p:column>
+
+                            <p:dialog widgetVar="dlgLoading" resizable="false"
+                                      showEffect="fade" hideEffect="fade" modal="true"
+                                      appendTo="@(body)">
+                                <p:outputPanel>
+                                    <h:outputText value="" />
+                                </p:outputPanel>
+                            </p:dialog>
+                        </p:dataTable>
+
+
+                    </h:form>
+                </p:panel>
+            </h:form> 
+        </ui:define>
+    </ui:composition>   
+</html>

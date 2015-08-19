@@ -6,6 +6,7 @@
 package com.bbva.admbio.service.impl;
 
 import com.bbva.admbio.dao.ITerminalDAO;
+import com.bbva.admbio.model.Login;
 import com.bbva.admbio.model.Terminal;
 import com.bbva.admbio.service.ITerminalService;
 import java.io.Serializable;
@@ -30,6 +31,17 @@ public class TerminalService implements Serializable, ITerminalService {
     @Autowired
     private ITerminalDAO terminalDao;
 
+    @Transactional(readOnly = false)
+    public boolean guardar(Terminal terminal) {
+        try {
+            terminalDao.guardar(terminal);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LOGGER.error(Constante.EXECPCION_ENCONTRADA + getClass().getName() + ": " + e.toString(), e);
+            return false;
+        }
+    }
 
     public List<Terminal> listar() {
         List<Terminal> terminal = new ArrayList<Terminal>();
