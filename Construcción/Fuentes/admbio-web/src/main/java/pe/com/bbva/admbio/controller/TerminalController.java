@@ -64,7 +64,7 @@ public class TerminalController implements Serializable {
         }
     }
 
-    public String agregar() {
+    public void agregar() {
         if (selectedLogin != null) {
             for (Login login : selectedLogin) {
                 Terminal terminal = new Terminal();
@@ -84,8 +84,9 @@ public class TerminalController implements Serializable {
                 terminalService.guardar(terminal);
             }
         }
+
+        terminales = terminalService.listar();
         close();
-        return "";
     }
 
     public void listarTerminalBio() {
