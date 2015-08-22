@@ -16,7 +16,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedProperty;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,32 +27,24 @@ import org.springframework.stereotype.Component;
  * @author max
  */
 @Component("terminalMB")
-@Scope
-////@Controller
-//@ManagedBean
-//@SessionScoped
+@Scope("request")
 public class TerminalController implements Serializable {
 
     private static final Logger log = Logger.getLogger(TerminalController.class);
     private static final long serialVersionUID = 1L;
 
-//    @Autowired
-//    private ITerminalService service;
-//    
-    @ManagedProperty(value = "#{terminalService}")
+    @Autowired
     private ITerminalService terminalService;
 
-//    @ManagedProperty(value = "#{loginService}")
     @Autowired
     private ILoginService loginService;
 
-//    @ManagedProperty(value = "#{motivoService}")
     @Autowired
     private IMotivoService motivoService;
 
-    private List<Terminal> lTerminal;
+    private List<Terminal> terminales;
     private List<Terminal> selectedTerminal;
-    private List<Login> lLogin;
+    private List<Login> usuariosAutenticados;
     private List<Login> selectedLogin;
     private Date fechaDeshabilitacion;
     private Motivo motivo;
@@ -64,9 +55,9 @@ public class TerminalController implements Serializable {
     public void init() {
         try {
             log.info("ConsultarTerminalController -------> init");
-            lTerminal = terminalService.listar();
+            terminales = terminalService.listar();
             motivos = motivoService.listarTodos();
-            lLogin = loginService.listarTodos();
+            usuariosAutenticados = loginService.listarTodos();
         } catch (Exception e) {
             e.printStackTrace();
 //            LOGGER.info(Constante.EXECPCION_ENCONTRADA + e.toString(), e);
@@ -90,7 +81,7 @@ public class TerminalController implements Serializable {
                 terminal.setTextoComentarios(comentario);
                 terminal.setUsuarioCreacion("max");
                 terminal.setUsuarioModificacion("max");
-//                service.guardar(terminal);
+                terminalService.guardar(terminal);
             }
         }
         close();
@@ -98,7 +89,7 @@ public class TerminalController implements Serializable {
     }
 
     public void listarTerminalBio() {
-        lLogin = loginService.listarTodos();
+        usuariosAutenticados = loginService.listarTodos();
     }
 
     public void close() {
@@ -108,8 +99,8 @@ public class TerminalController implements Serializable {
         request.reset("form:pnlModificar");
     }
 
-    public List<Terminal> getlTerminal() {
-        return lTerminal;
+    public List<Terminal> getTerminales() {
+        return terminales;
     }
 
     public List<Login> getSelectedLogin() {
@@ -128,8 +119,8 @@ public class TerminalController implements Serializable {
         return motivos;
     }
 
-    public List<Login> getlLogin() {
-        return lLogin;
+    public List<Login> getUsuariosAutenticados() {
+        return usuariosAutenticados;
     }
 
     public Date getFechaDeshabilitacion() {
@@ -158,30 +149,6 @@ public class TerminalController implements Serializable {
 
     public void setMotivo(Motivo motivo) {
         this.motivo = motivo;
-    }
-
-    public ILoginService getLoginService() {
-        return loginService;
-    }
-
-    public void setLoginService(ILoginService loginService) {
-        this.loginService = loginService;
-    }
-
-    public IMotivoService getMotivoService() {
-        return motivoService;
-    }
-
-    public void setMotivoService(IMotivoService motivoService) {
-        this.motivoService = motivoService;
-    }
-
-    public ITerminalService getTerminalService() {
-        return terminalService;
-    }
-
-    public void setTerminalService(ITerminalService terminalService) {
-        this.terminalService = terminalService;
     }
 
 }

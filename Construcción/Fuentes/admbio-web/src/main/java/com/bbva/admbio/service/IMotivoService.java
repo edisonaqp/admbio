@@ -14,5 +14,7 @@ import java.util.List;
  */
 public interface IMotivoService {
 
-    public List<Motivo> listarTodos();
+    List<Motivo> listarTodos();
+    
+    Motivo buscarPorId(Integer id);
 }

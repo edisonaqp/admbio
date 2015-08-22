@@ -31,6 +31,7 @@ public class MotivoService implements Serializable, IMotivoService {
 
     private static final Logger LOGGER = Logger.getLogger(MotivoService.class);
 
+    @Override
     public List<Motivo> listarTodos() {
         List<Motivo> lista = new ArrayList<Motivo>();
         try {
@@ -39,6 +40,15 @@ public class MotivoService implements Serializable, IMotivoService {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    @Override
+    public Motivo buscarPorId(Integer id) {
+        Motivo motivo = null;
+
+        motivo = motivoDAO.buscarPorId(id);
+
+        return motivo;
     }
 
 }

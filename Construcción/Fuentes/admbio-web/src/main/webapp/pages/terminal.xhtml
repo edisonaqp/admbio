@@ -22,7 +22,7 @@
                 <h:outputText value="" />
                 <h:form id="form">
                     <p:dataTable id="tablaTerminales"
-                                 value="#{terminalMB.lTerminal}" var="terminal"
+                                 value="#{terminalMB.terminales}" var="terminal"
                                  rowKey="#{terminal.centroCosto}"
                                  selection="#{terminalMB.selectedTerminal}"
                                  paginator="true" rows="10" paginatorPosition="bottom" 
@@ -87,7 +87,7 @@
                                 <p:outputLabel value="Seleccione uno o varios terminales a deshabilitar:" />
 
                                 <p:dataTable id="tablaTerminal"
-                                             value="#{terminalMB.lLogin}" var="terminal"
+                                             value="#{terminalMB.usuariosAutenticados}" var="terminal"
                                              rowKey="#{terminal.centroCosto}"
                                              selection="#{terminalMB.selectedLogin}"
                                              paginator="true" rows="10" paginatorPosition="bottom" 
@@ -165,7 +165,7 @@
                                 <p:outputLabel value="Hasta Cuando?" />
                                 <p:calendar id="button" style="width:10px" value="#{terminalMB.fechaDeshabilitacion}" showOn="button" />
                                 <p:outputLabel value="Indique un Motivo" />
-                                <p:selectOneMenu id="advanced" value="#{terminalMB.motivo}" converter="motivoConverter" panelStyle="width:180px"
+                                <p:selectOneMenu id="advanced" value="#{terminalMB.motivo}" converter="#{motivoConverter}" panelStyle="width:180px"
                                                  style="width:160px" filterMatchMode="startsWith">
                                     <f:selectItems value="#{terminalMB.motivos}" var="motivo" itemLabel="#{motivo.mnemonico}" itemValue="#{theme}" />
                                 </p:selectOneMenu>
