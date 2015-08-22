@@ -10,7 +10,7 @@
 				        http://www.springframework.org/schema/tx
 				        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.bbva.admbio" />
+    <context:component-scan base-package="pe.com.bbva.admbio" />
 
     <context:annotation-config />
     <!--<context:spring-configured/>-->
@@ -41,12 +41,12 @@
         <!--<property name="packagesToScan" value="com.bbva.admbio.model" />-->
         <property name="annotatedClasses">
             <list>
-                <value>com.bbva.admbio.model.DepuracionCliente</value>
-                <value>com.bbva.admbio.model.EstadoCliente</value>
-                <value>com.bbva.admbio.model.Login</value>
-                <value>com.bbva.admbio.model.Motivo</value>
-                <value>com.bbva.admbio.model.ServidorOficina</value>
-                <value>com.bbva.admbio.model.Terminal</value>
+                <value>pe.com.bbva.admbio.model.DepuracionCliente</value>
+                <value>pe.com.bbva.admbio.model.EstadoCliente</value>
+                <value>pe.com.bbva.admbio.model.Login</value>
+                <value>pe.com.bbva.admbio.model.Motivo</value>
+                <value>pe.com.bbva.admbio.model.ServidorOficina</value>
+                <value>pe.com.bbva.admbio.model.Terminal</value>
             </list>
         </property>
         <property name="hibernateProperties">
