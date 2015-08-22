@@ -16,6 +16,7 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedProperty;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,26 @@ import org.springframework.stereotype.Component;
  * @author max
  */
 @Component("terminalMB")
-@Scope("session")
+@Scope
+////@Controller
+//@ManagedBean
+//@SessionScoped
 public class TerminalController implements Serializable {
 
     private static final Logger log = Logger.getLogger(TerminalController.class);
     private static final long serialVersionUID = 1L;
 
-    @Autowired
+//    @Autowired
+//    private ITerminalService service;
+//    
+    @ManagedProperty(value = "#{terminalService}")
     private ITerminalService terminalService;
+
+//    @ManagedProperty(value = "#{loginService}")
     @Autowired
     private ILoginService loginService;
+
+//    @ManagedProperty(value = "#{motivoService}")
     @Autowired
     private IMotivoService motivoService;
 
@@ -54,15 +65,15 @@ public class TerminalController implements Serializable {
         try {
             log.info("ConsultarTerminalController -------> init");
             lTerminal = terminalService.listar();
-            lLogin = loginService.listarTodos();
             motivos = motivoService.listarTodos();
+            lLogin = loginService.listarTodos();
         } catch (Exception e) {
             e.printStackTrace();
 //            LOGGER.info(Constante.EXECPCION_ENCONTRADA + e.toString(), e);
         }
     }
 
-    public void agregar() {
+    public String agregar() {
         if (selectedLogin != null) {
             for (Login login : selectedLogin) {
                 Terminal terminal = new Terminal();
@@ -79,10 +90,11 @@ public class TerminalController implements Serializable {
                 terminal.setTextoComentarios(comentario);
                 terminal.setUsuarioCreacion("max");
                 terminal.setUsuarioModificacion("max");
-                terminalService.guardar(terminal);
+//                service.guardar(terminal);
             }
         }
         close();
+        return "";
     }
 
     public void listarTerminalBio() {
@@ -148,6 +160,28 @@ public class TerminalController implements Serializable {
         this.motivo = motivo;
     }
 
-    
-    
+    public ILoginService getLoginService() {
+        return loginService;
+    }
+
+    public void setLoginService(ILoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    public IMotivoService getMotivoService() {
+        return motivoService;
+    }
+
+    public void setMotivoService(IMotivoService motivoService) {
+        this.motivoService = motivoService;
+    }
+
+    public ITerminalService getTerminalService() {
+        return terminalService;
+    }
+
+    public void setTerminalService(ITerminalService terminalService) {
+        this.terminalService = terminalService;
+    }
+
 }

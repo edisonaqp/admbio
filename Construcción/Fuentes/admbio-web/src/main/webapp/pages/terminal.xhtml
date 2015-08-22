@@ -30,7 +30,7 @@
                                  emptyMessage="No se encontraron registros"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
                         <f:facet name="header">
-                            
+
                         </f:facet>
                         <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
                         <p:column headerText="Oficina">
@@ -167,7 +167,6 @@
                                 <p:outputLabel value="Indique un Motivo" />
                                 <p:selectOneMenu id="advanced" value="#{terminalMB.motivo}" converter="motivoConverter" panelStyle="width:180px"
                                                  style="width:160px" filterMatchMode="startsWith">
-
                                     <f:selectItems value="#{terminalMB.motivos}" var="motivo" itemLabel="#{motivo.mnemonico}" itemValue="#{theme}" />
                                 </p:selectOneMenu>
 
@@ -178,10 +177,15 @@
                                 <h:outputText id="display" />
                             </h:panelGrid> 
                             <div align="center">
-                                <p:commandButton value="Guardar" process="@this" action="#{terminalMB.agregar}"/>
+                                
+                                <p:commandButton value="Guardar" process=":form:pnlModificar" action="#{terminalMB.agregar}"
+                                                 update=":form:pnlModificar"/>
+                                <p:commandButton value="Agregar" actionListener="#{terminalMB.agregar}" 
+                                                 icon="ui-icon-disk" partialSubmit="true" process="@this"
+                                                 update=":form:pnlModificar" />
                                 <p:commandButton value="Aceptar" action="#{terminalMB.agregar}"
-                                                 partialSubmit="true" process="pnlModificar" 
-                                                 update="pnlModificar"/>
+                                                 
+                                                 update=":form:pnlModificar"/>
 
                                 <p:commandButton id="btnCancelarMod" value="Cancelar" action="#{terminalMB.close}" 
                                                  update="pnlModificar" process="@this">
@@ -194,26 +198,6 @@
                         </p:panel>
 
                     </p:dialog>         
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <p:dialog id="resServDeu" for="resBtn" header="Deshabilitar Terminal Biométrico"
-                              widgetVar="resServDeuDialog" modal="true" closable="true" >
-
-
-
-                    </p:dialog>
-
                 </h:form>
             </p:panel>
         </ui:define>
