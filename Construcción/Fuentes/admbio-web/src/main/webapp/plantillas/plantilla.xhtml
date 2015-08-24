@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
     <h:head>
         <title>AdmBio</title>
@@ -57,23 +58,22 @@
                     <h:form id="formMenuBar">
                         <p:menubar id="menuOpc" >
                             <p:submenu id="opcHome" label="Home" icon="ui-icon-home" >
-                                <p:menuitem>
-                                    <h:commandLink value="Parámetros" type="button"
-                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemPar"
-                                                   styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
-                                </p:menuitem>
+                                
+                                
+                                  
+                                
                             </p:submenu>
 
                             <p:submenu id="opcTerminales" label="Terminales" icon="ui-icon-terminal" >
                                 <p:menuitem>
                                     <h:commandLink value="Deshabilitar" type="button"
-                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemDeshabil"
+                                                   action="/pages/terminalDeshabilitar.jsf?faces-redirect=true" id="itemDeshabil"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                     <h:commandLink value="Consultar" type="button"
-                                                   action="/pages/terminal.jsf?faces-redirect=true" id="itemConsulta"
+                                                   action="/pages/terminalConsulta.jsf?faces-redirect=true" id="itemConsulta"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                     <h:commandLink value="Consulta Historica" type="button"
-                                                   action="/pages/administrar-parametria.jsf?faces-redirect=true" id="itemConsultaHistorica"
+                                                   action="/pages/terminalConsultaHistorica.jsf?faces-redirect=true" id="itemConsultaHistorica"
                                                    styleClass="ui-menuitem-link ui-corner-all" style="color:#fff" />
                                 </p:menuitem>
                             </p:submenu>

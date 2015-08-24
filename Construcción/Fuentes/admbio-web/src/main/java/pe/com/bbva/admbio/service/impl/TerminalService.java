@@ -6,11 +6,11 @@
 package pe.com.bbva.admbio.service.impl;
 
 import pe.com.bbva.admbio.dao.ITerminalDAO;
-import pe.com.bbva.admbio.model.Login;
 import pe.com.bbva.admbio.model.Terminal;
 import pe.com.bbva.admbio.service.ITerminalService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +43,32 @@ public class TerminalService implements Serializable, ITerminalService {
         }
     }
 
+    @Transactional(readOnly = false)
+    public boolean actualizar(Terminal terminal) {
+        try {
+            terminalDao.actualizar(terminal);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LOGGER.error(Constante.EXECPCION_ENCONTRADA + getClass().getName() + ": " + e.toString(), e);
+            return false;
+        }
+    }
+
     public List<Terminal> listar() {
         List<Terminal> terminal = new ArrayList<Terminal>();
         try {
             terminal = terminalDao.listarTerminal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return terminal;
+    }
+
+    public List<Terminal> listarHistorial(Date desde, Date hasta) {
+        List<Terminal> terminal = new ArrayList<Terminal>();
+        try {
+            terminal = terminalDao.listarHistorial(desde, hasta);
         } catch (Exception e) {
             e.printStackTrace();
         }

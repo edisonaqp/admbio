@@ -19,11 +19,16 @@
         <ui:define name="contenido">
             <p:panel header="Terminales Deshabilitados" id="pnlTerminal">
                 <p:separator />
+                <h:outputText value="#{terminalMB.fechaActual}">
+                    <f:convertDateTime dateStyle="full"
+                                       timeStyle="long" type="date" />
+                </h:outputText>                
+                <p:separator style="height: 10px"/>
                 <h:outputText value="" />
                 <h:form id="form">
                     <p:dataTable id="tablaTerminales"
                                  value="#{terminalMB.terminales}" var="terminal"
-                                 rowKey="#{terminal.centroCosto}"
+                                 rowKey="#{terminal.terminal}"
                                  selection="#{terminalMB.selectedTerminal}"
                                  paginator="true" rows="10" paginatorPosition="bottom" 
                                  currentPageReportTemplate="{currentPage} de {totalPages}"
@@ -43,6 +48,16 @@
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
+                        <p:column headerText="Puesto">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.puesto}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.puesto}" readonly="true" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
                         <p:column headerText="Terminal">
                             <p:cellEditor>
                                 <f:facet name="output">
@@ -58,8 +73,8 @@
                                 <f:convertDateTime type="date" pattern="dd-MM-yyyy"></f:convertDateTime>
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="Estado">
-                            <h:outputText value="#{terminal.estado}" />
+                        <p:column headerText="Motivo">
+                            <h:outputText value="#{terminal.motivo.mnemonico}" />
                         </p:column>
 
                         <p:dialog widgetVar="dlgLoading" resizable="false"
@@ -76,7 +91,8 @@
                                      title="Cargar" partialSubmit="true" 
                                      process="btnModificar">
                     </p:commandButton>
-                    <p:commandButton id="btnRemover" value="Remover" action="#{loginMB.grabar}" ajax="false"/>
+                    <p:commandButton id="btnRemover" value="Remover" action="#{terminalMB.eliminar}" ajax="false"
+                                     process="tablaTerminales" update=":form:tablaTerminales"/>
 
 
                     <p:dialog header="Deshabilitar Terminal Biométrico" widgetVar="dlgModificar" modal="true" resizable="false"
@@ -88,7 +104,7 @@
 
                                 <p:dataTable id="tablaTerminal"
                                              value="#{terminalMB.usuariosAutenticados}" var="terminal"
-                                             rowKey="#{terminal.centroCosto}"
+                                             rowKey="#{terminal.terminal}"
                                              selection="#{terminalMB.selectedLogin}"
                                              paginator="true" rows="10" paginatorPosition="bottom" 
                                              currentPageReportTemplate="{currentPage} de {totalPages}"
@@ -177,14 +193,8 @@
                                 <h:outputText id="display" />
                             </h:panelGrid> 
                             <div align="center">
-                                
+
                                 <p:commandButton value="Guardar" process=":form:pnlModificar" action="#{terminalMB.agregar}"
-                                                 update=":form:pnlModificar"/>
-                                <p:commandButton value="Agregar" actionListener="#{terminalMB.agregar}" 
-                                                 icon="ui-icon-disk" partialSubmit="true" process="@this"
-                                                 update=":form:pnlModificar" />
-                                <p:commandButton value="Aceptar" action="#{terminalMB.agregar}"
-                                                 
                                                  update=":form:pnlModificar"/>
 
                                 <p:commandButton id="btnCancelarMod" value="Cancelar" action="#{terminalMB.close}" 

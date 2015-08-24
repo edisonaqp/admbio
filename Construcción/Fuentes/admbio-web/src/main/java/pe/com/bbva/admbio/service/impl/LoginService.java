@@ -43,10 +43,46 @@ public class LoginService implements Serializable, ILoginService {
         }
     }
 
+    
+    @Transactional(readOnly = false)
+    public boolean actualizar(Login login) {
+        try {
+            loginDAO.actualizar(login);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LOGGER.error(Constante.EXECPCION_ENCONTRADA + getClass().getName() + ": " + e.toString(), e);
+            return false;
+        }
+    }
+    
+    @Transactional(readOnly = false)
+    public boolean actualizarEstado(String terminal) {
+        try {
+            loginDAO.actualizarEstado(terminal);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LOGGER.error(Constante.EXECPCION_ENCONTRADA + getClass().getName() + ": " + e.toString(), e);
+            return false;
+        }
+    }
+    
     public List<Login> listarTodos() {
         List<Login> lista = new ArrayList<Login>();
         try {
             lista = loginDAO.buscar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    @Override
+    public List<Login> listarActivos() {
+        List<Login> lista = new ArrayList<Login>();
+        try {
+            lista = loginDAO.listarActivos();
         } catch (Exception e) {
             e.printStackTrace();
         }

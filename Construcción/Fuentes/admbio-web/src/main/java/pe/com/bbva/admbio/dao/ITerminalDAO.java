@@ -5,6 +5,7 @@
  */
 package pe.com.bbva.admbio.dao;
 
+import java.util.Date;
 import pe.com.bbva.admbio.model.Terminal;
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
 public interface ITerminalDAO extends IDAO<Terminal> {
 
     public List<Terminal> listarTerminal();
+
+    public List<Terminal> listarHistorial(Date desde, Date hasta);
 }

@@ -14,8 +14,14 @@ import java.util.List;
  */
 public interface ILoginService {
 
-    boolean guardar(Login login);
+    public boolean guardar(Login login);
+
+    public boolean actualizar(Login login);
+
+    public boolean actualizarEstado(String terminal);
 
     public List<Login> listarTodos();
+
+    public List<Login> listarActivos();
 
 }

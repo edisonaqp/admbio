@@ -5,6 +5,7 @@
  */
 package pe.com.bbva.admbio.service;
 
+import java.util.Date;
 import pe.com.bbva.admbio.model.Terminal;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface ITerminalService {
 
     public boolean guardar(Terminal terminal);
 
+    public boolean actualizar(Terminal terminal);
+
     public List<Terminal> listar();
 
+    public List<Terminal> listarHistorial(Date desde, Date hasta);
 }

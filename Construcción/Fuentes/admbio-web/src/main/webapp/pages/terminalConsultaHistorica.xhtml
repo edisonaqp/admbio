@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <ui:composition template="/plantillas/plantilla.xhtml">
+        <ui:define name="cabecera">
+            <script type="text/javascript">
+            </script>
+        </ui:define>
+
+        <ui:define name="contenido">
+            <p:panel header="Terminales Deshabilitados por Fecha" id="pnlTerminal">
+                <h:form id="form">
+                    <p:separator />
+                    <h:panelGrid columns="5">
+                        <p:outputLabel value="Desde :" />
+                        <p:calendar id="desde" style="width:10px" value="#{terminalMB.fechaDesde}" showOn="button" />
+                        <p:outputLabel value="Hasta :" />
+                        <p:calendar id="hasta" style="width:10px" value="#{terminalMB.fechaHasta}" showOn="button" />
+
+                        <p:commandButton id="btnBuscar" value="Buscar" action="#{terminalMB.listarHistorial}" ajax="false"
+                                         process="tablaTerminales" update=":form:tablaTerminales"/>
+                    </h:panelGrid>
+                    <p:separator />
+
+                    <p:dataTable id="tablaTerminales"
+                                 value="#{terminalMB.terminalesHistoricos}" var="terminal"
+                                 paginator="true" rows="10" paginatorPosition="bottom" 
+                                 currentPageReportTemplate="{currentPage} de {totalPages}"
+                                 emptyMessage="No se encontraron registros"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+                        <p:column headerText="Oficina">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.centroCosto}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.centroCosto}" readonly="true" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Puesto">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.puesto}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.puesto}" readonly="true" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Terminal">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{terminal.id}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{terminal.id}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{terminal.fechaHoraFin}">
+                                <f:convertDateTime type="date" pattern="dd-MM-yyyy"></f:convertDateTime>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Motivo">
+                            <h:outputText value="#{terminal.motivo.mnemonico}" />
+                        </p:column>
+
+                        <p:dialog widgetVar="dlgLoading" resizable="false"
+                                  showEffect="fade" hideEffect="fade" modal="true"
+                                  appendTo="@(body)">
+                            <p:outputPanel>
+                                <h:outputText value="" />
+                            </p:outputPanel>
+                        </p:dialog>
+                    </p:dataTable>
+                    <div align="right">
+
+                        <p:commandButton id="btnRemover" value="Volver" action="/pages/terminalConsulta.jsf?faces-redirect=true" ajax="false"
+                                         process="tablaTerminales" update=":form:tablaTerminales"/>
+                    </div>
+
+
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>   
+</html>

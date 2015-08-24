@@ -43,9 +43,13 @@ public class TerminalController implements Serializable {
     private IMotivoService motivoService;
 
     private List<Terminal> terminales;
+    private List<Terminal> terminalesHistoricos;
     private List<Terminal> selectedTerminal;
     private List<Login> usuariosAutenticados;
     private List<Login> selectedLogin;
+    private Date fechaDesde;
+    private Date fechaHasta;
+    private Date fechaActual;
     private Date fechaDeshabilitacion;
     private Motivo motivo;
     private List<Motivo> motivos;
@@ -54,7 +58,8 @@ public class TerminalController implements Serializable {
     @PostConstruct
     public void init() {
         try {
-            log.info("ConsultarTerminalController -------> init");
+            log.info("ConsultarTerminalController - init");
+            fechaActual = new Date();
             terminales = terminalService.listar();
             motivos = motivoService.listarTodos();
             usuariosAutenticados = loginService.listarTodos();
@@ -82,15 +87,31 @@ public class TerminalController implements Serializable {
                 terminal.setUsuarioCreacion("max");
                 terminal.setUsuarioModificacion("max");
                 terminalService.guardar(terminal);
+                login.setEstado(BigInteger.ZERO);
+                loginService.actualizar(login);
             }
         }
-
         terminales = terminalService.listar();
         close();
     }
 
+    public void eliminar() {
+        if (selectedTerminal != null) {
+            for (Terminal terminal : selectedTerminal) {
+                terminal.setEstado(BigInteger.ONE);
+                terminalService.actualizar(terminal);
+                loginService.actualizarEstado(terminal.getTerminal());
+            }
+        }
+        terminales = terminalService.listar();
+    }
+
     public void listarTerminalBio() {
-        usuariosAutenticados = loginService.listarTodos();
+        usuariosAutenticados = loginService.listarActivos();
+    }
+
+    public void listarHistorial() {
+        terminalesHistoricos=terminalService.listarHistorial(fechaDesde, fechaHasta);
     }
 
     public void close() {
@@ -102,6 +123,10 @@ public class TerminalController implements Serializable {
 
     public List<Terminal> getTerminales() {
         return terminales;
+    }
+
+    public List<Terminal> getTerminalesHistoricos() {
+        return terminalesHistoricos;
     }
 
     public List<Login> getSelectedLogin() {
@@ -150,6 +175,30 @@ public class TerminalController implements Serializable {
 
     public void setMotivo(Motivo motivo) {
         this.motivo = motivo;
+    }
+
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
+
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+
+    public Date getFechaHasta() {
+        return fechaHasta;
+    }
+
+    public void setFechaHasta(Date fechaHasta) {
+        this.fechaHasta = fechaHasta;
     }
 
 }
