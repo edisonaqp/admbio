@@ -37,8 +37,10 @@
                                  currentPageReportTemplate="{currentPage} de {totalPages}"
                                  emptyMessage="No se encontraron registros"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                        <f:facet name="header">
 
-                        <p:column headerText="Oficina">
+                        </f:facet>
+                        <p:column headerText="Oficina" style="height: 14px">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{terminal.centroCosto}" />
