@@ -28,7 +28,7 @@
                 <h:form id="form">
                     <p:dataTable id="tablaTerminales"
                                  value="#{terminalMB.terminales}" var="terminal"
-                                 rowKey="#{terminal.terminal}"
+                                 rowKey="#{terminal.id}"
                                  selection="#{terminalMB.selectedTerminal}"
                                  paginator="true" rows="10" paginatorPosition="bottom" 
                                  currentPageReportTemplate="{currentPage} de {totalPages}"
