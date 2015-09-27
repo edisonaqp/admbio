@@ -6,7 +6,6 @@
 package pe.com.bbva.admbio.dao;
 
 import pe.com.bbva.admbio.model.ServidorOficina;
-import pe.com.bbva.admbio.model.Terminal;
 import java.util.List;
 
 /**
@@ -15,5 +14,7 @@ import java.util.List;
  */
 public interface IServidorDAO extends IDAO<ServidorOficina> {
 
-      public List<ServidorOficina> listarServidor();
+//      public List<ServidorOficina> listarServidor();
+    
+    List<ServidorOficina> buscarPorOficina(String centroCosto); 
 }

@@ -27,30 +27,34 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServidorService implements Serializable, IServidorService {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger log = Logger.getLogger(ServidorService.class);
+    private static final Logger logger = Logger.getLogger(ServidorService.class);
 
     @Autowired
     private IServidorDAO servidorDao;
 
     public List<ServidorOficina> listar() {
-        List<ServidorOficina> servidor = new ArrayList<ServidorOficina>();
+        List<ServidorOficina> servidores = new ArrayList<ServidorOficina>();
         try {
-            servidor = servidorDao.listarServidor();
+            servidores = servidorDao.buscar();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
+        }
+
+        return servidores;
+    }
+
+    @Override
+    public ServidorOficina buscarPorId(Integer id) {
+        ServidorOficina servidor = new ServidorOficina();
+        try {
+            servidor = servidorDao.buscarPorId(id);
+        } catch (Exception e) {
+            logger.error(e);
         }
         return servidor;
     }
-
-    public List<ServidorOficina> listarTodos() {
-        List<ServidorOficina> servidor = new ArrayList<ServidorOficina>();
-        ServidorOficina so = new ServidorOficina();
-        try {
-            so = servidorDao.buscarPorId(1);
-            servidor = servidorDao.buscar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return servidor;
+    
+    public List<ServidorOficina> buscarPorCentroCosto(String centroCosto) {
+        return servidorDao.buscarPorOficina(centroCosto);        
     }
 }

@@ -17,46 +17,48 @@
         </ui:define>
 
         <ui:define name="contenido">
-            <p:panel header="Servidores" id="pnlTerminal">
-                <p:separator />
-                <h:outputText value="" />
-                <h:form>
-                    <p:dataTable id="tablaTerminales"
-                                 value="#{servidorMB.lServidor}" var="terminal"
+            <p:panel header="Administración de Servidores" id="pnlConsultaServidor">
+                <h:form id="form">
+                    <p:separator style="height: 10px; " />
+                    <h:outputText value="Cód. de Oficina: " /> 
+                    <p:inputText value="#{servidorMB.filtroOficina}" />
+                    <h:outputText value=" " /> 
+                    <p:commandButton value="Buscar" actionListener="#{servidorMB.buscarServidorOficina}"
+                                     update="form:tablaServidores" />
+                    <p:separator style="height: 10px; " />
+                    <p:dataTable id="tablaServidores"
+                                 value="#{servidorMB.servidores}" var="servidor"
+                                 rowKey="#{servidor.id}"
+                                 selection="#{servidorMB.selectedServidor}"
                                  paginator="true" rows="10" paginatorPosition="bottom" 
                                  currentPageReportTemplate="{currentPage} de {totalPages}"
                                  emptyMessage="No se encontraron registros"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+                        <f:facet name="header">
 
+                        </f:facet>
+                        <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
                         <p:column headerText="Oficina">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{terminal.id}" />
+                                    <h:outputText value="#{servidor.centroCosto}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{terminal.id}" readonly="true" />
+                                    <p:inputText value="#{servidor.centroCosto}" readonly="true" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText="Terminal">
+                        <p:column headerText="Servidor">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{terminal.centroCosto}" />
+                                    <h:outputText value="#{servidor.servidor}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{terminal.centroCosto}" />
+                                    <p:inputText value="#{servidor.servidor}" readonly="true" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
-                        <p:column headerText="Fecha">
-                            <h:outputText value="#{terminal.fechaHoraCreacion}">
-                                <f:convertDateTime type="date" pattern="dd-MM-yyyy"></f:convertDateTime>
-                            </h:outputText>
-                        </p:column>
-                        <p:column headerText="Estado">
-                            <h:outputText value="#{terminal.estado}" />
-                        </p:column>
-                        
+
                         <p:dialog widgetVar="dlgLoading" resizable="false"
                                   showEffect="fade" hideEffect="fade" modal="true"
                                   appendTo="@(body)">
@@ -66,7 +68,6 @@
                         </p:dialog>
                     </p:dataTable>
 
-                    <p:commandButton id="grabar" value="Grabar" action="#{servidorMB.lista}" ajax="false"/>
                 </h:form>
             </p:panel>
         </ui:define>

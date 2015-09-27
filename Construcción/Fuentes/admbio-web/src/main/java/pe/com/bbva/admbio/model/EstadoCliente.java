@@ -6,7 +6,6 @@
 package pe.com.bbva.admbio.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class EstadoCliente implements Serializable {
     @Column(name = "NU_NUMERO_DOCUMENTO")
     private String numeroDocumento;
     @Column(name = "ST_INDICADOR_PDP")
-    private BigInteger estadoIndicadorPdp;
+    private String estadoIndicadorPdp;
     @Column(name = "FH_CREACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraCreacion;
@@ -47,7 +46,7 @@ public class EstadoCliente implements Serializable {
     public EstadoCliente() {
     }
 
-    public EstadoCliente(Integer id, String tipoDocumento, String numeroDocumento, BigInteger estadoIndicadorPdp) {
+    public EstadoCliente(Integer id, String tipoDocumento, String numeroDocumento, String estadoIndicadorPdp) {
         this.id = id;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
@@ -78,11 +77,11 @@ public class EstadoCliente implements Serializable {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public BigInteger getEstadoIndicadorPdp() {
+    public String getEstadoIndicadorPdp() {
         return estadoIndicadorPdp;
     }
 
-    public void setEstadoIndicadorPdp(BigInteger estadoIndicadorPdp) {
+    public void setEstadoIndicadorPdp(String estadoIndicadorPdp) {
         this.estadoIndicadorPdp = estadoIndicadorPdp;
     }
 

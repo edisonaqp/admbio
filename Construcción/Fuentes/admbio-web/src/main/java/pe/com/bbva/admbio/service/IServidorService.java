@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,5 +17,7 @@ public interface IServidorService {
 
     public List<ServidorOficina> listar();
 
-    public List<ServidorOficina> listarTodos();
+    ServidorOficina buscarPorId(Integer id);
+
+    List<ServidorOficina> buscarPorCentroCosto(String centroCosto);
 }

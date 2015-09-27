@@ -23,35 +23,69 @@ import org.springframework.stereotype.Component;
 @Scope("session")
 public class ServidorController implements Serializable {
 
-    private static final Logger log = Logger.getLogger(ServidorController.class);
+    private static final Logger logger = Logger.getLogger(ServidorController.class);
     private static final long serialVersionUID = 1L;
 
     @Autowired
     private IServidorService servidorService;
 
-    private List<ServidorOficina> lServidor;
+    private List<ServidorOficina> servidores;
+    private List<ServidorOficina> selectedServidor;
+    private String filtroOficina;
 
     @PostConstruct
     public void init() {
         try {
-            log.info("ConsultarTerminalController -------> init");
-            lServidor = servidorService.listar();
+            logger.info("ConsultarTerminalController -------> init");
+            servidores = servidorService.listar();
         } catch (Exception e) {
-            e.printStackTrace();
-//            LOGGER.info(Constante.EXECPCION_ENCONTRADA + e.toString(), e);
+            logger.error(e);
         }
     }
-
-    public void lista() {
-        lServidor = servidorService.listarTodos();
+    
+    public void buscarServidorOficina() {
+        logger.info("buscarServidorOficina(cc=" + this.filtroOficina + ")");
+        this.servidores = servidorService.buscarPorCentroCosto(this.filtroOficina);
     }
 
-    public List<ServidorOficina> getlServidor() {
-        return lServidor;
+    public void listar() {
+        servidores = servidorService.listar();
     }
 
-    public void setlServidor(List<ServidorOficina> lServidor) {
-        this.lServidor = lServidor;
+    public List<ServidorOficina> getServidores() {
+        return servidores;
+    }
+
+    public void setServidores(List<ServidorOficina> servidores) {
+        this.servidores = servidores;
+    }
+
+    /**
+     * @return the selectedServidor
+     */
+    public List<ServidorOficina> getSelectedServidor() {
+        return selectedServidor;
+    }
+
+    /**
+     * @param selectedServidor the selectedServidor to set
+     */
+    public void setSelectedServidor(List<ServidorOficina> selectedServidor) {
+        this.selectedServidor = selectedServidor;
+    }
+
+    /**
+     * @return the filtroOficina
+     */
+    public String getFiltroOficina() {
+        return filtroOficina;
+    }
+
+    /**
+     * @param filtroOficina the filtroOficina to set
+     */
+    public void setFiltroOficina(String filtroOficina) {
+        this.filtroOficina = filtroOficina;
     }
     
     
