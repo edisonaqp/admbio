@@ -17,28 +17,84 @@
         </ui:define>
 
         <ui:define name="contenido">
-            <h:form id="form">
-                <p:panel header="" id="pnlCliente">
+            <p:panel header="" id="pnlCliente">
+                <p:separator />
+
+                <h:outputText value="" />
+                <h:form id="form">
+                    <div align="center">
+                        <p:panel id="basic" header="Depuración de Datos" style="margin-bottom:20px;width: 250px ">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:outputText
+                                    value="Presione este botón para eliminar 
+                                    datos de clientes que no dieron su consentimiento
+                                    según la Ley de protección de Datos Personales" />
+                            </h:panelGrid>
+                            <p:commandButton id="btnDepurar" value="Depurar" update=":form:pnlNotificar" oncomplete="dlgNotificar.show()"
+                                             action="#{depuracionMB.notificar}"
+                                             title="Cargar" partialSubmit="true" 
+                                             process="btnDepurar">
+                            </p:commandButton>
+                            <p:separator />
+                        </p:panel>
+                    </div>
                     <p:separator />
 
-                    <h:outputText value="" />
-                    <h:form id="form">
-                        <div align="center">
-                            <p:panel id="basic" header="Depuración de Datos" style="margin-bottom:20px;width: 250px ">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                    <h:outputText
-                                        value="Presione este botón para eliminar 
-                                        datos de clientes que no dieron su consentimiento
-                                        según la Ley de protección de Datos Personales" />
-                                </h:panelGrid>
-                                <p:commandButton value="Depurar"  action="#{terminalMB.agregar}" />
-                                <p:separator />
-                            </p:panel>
-                        </div>
-                        <p:separator />
-                    </h:form>
-                </p:panel>
-            </h:form> 
+                    <p:dialog header="Depurar Datos Biométricos" widgetVar="dlgNotificar" modal="true" resizable="false"
+                              showEffect="fade" closable="false">
+                        <p:panel id="pnlNotificar" >
+                            <h:panelGrid >
+                                <p:outputLabel value="¿Está seguro de eliminar la información biométrica de los clientes
+                                               de forma permanente?" />
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2">
+                                <p:outputLabel value="Total clientes: " />
+                                <p:outputLabel value="#{depuracionMB.totalClientes}" />
+                                <p:outputLabel value="Total clientes a eliminar: " />
+                                <p:outputLabel value="#{depuracionMB.totalClientesEliminar}" />
+                            </h:panelGrid>
+                            <div align="center">
+                                <p:commandButton id="btnAceptar" value="Aceptar" update=":form:pnlResult" oncomplete="dlgResult.show()"
+                                                 action="#{depuracionMB.depurar}"
+                                                 title="Cargar" partialSubmit="true" 
+                                                 process="btnAceptar">
+                                </p:commandButton>
+                                <p:commandButton id="btnCancelarMod" value="Cancelar" action="#{depuracionMB.close}" 
+                                                 update="pnlNotificar" process="@this">
+                                </p:commandButton>
+                            </div>
+                            <p:messages id="ModMessages"/>
+                        </p:panel>
+                    </p:dialog> 
+
+                    <p:dialog header="Resultado de la Depuración" widgetVar="dlgResult" modal="true" resizable="false"
+                              showEffect="fade" closable="false">
+                        <p:panel id="pnlResult" >
+                            <h:panelGrid >
+                                <p:outputLabel value="El proceso de depuración terminó satisfactoriamente" />
+                            </h:panelGrid>
+                            <h:panelGrid  columns="2">
+                                <p:outputLabel value="Total clientes (Antes): " />
+                                <p:outputLabel value="#{depuracionMB.clientesIniciales}" />
+                                <p:outputLabel value="Registros eliminados: " />
+                                <p:outputLabel value="#{depuracionMB.clientesDepurados}" />
+                                <p:outputLabel value="Errores: " />
+                                <p:outputLabel value="#{depuracionMB.clientesError}" />
+                                <p:outputLabel value="Total de Clientes (Después): " />
+                                <p:outputLabel value="#{depuracionMB.clientesFinales}" />
+                            </h:panelGrid>
+                           
+                            <div align="center">
+                                <p:commandButton id="btnCancelarResult" value="Aceptar" action="#{depuracionMB.closeResult}" 
+                                                 update="pnlResult" process="@this">
+                                </p:commandButton>
+                            </div>
+                            <p:messages id="ModMessagesResult"/>
+                        </p:panel>
+                    </p:dialog> 
+
+                </h:form>
+            </p:panel>
         </ui:define>
     </ui:composition>   
 </html>

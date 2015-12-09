@@ -5,16 +5,15 @@
  */
 package pe.com.bbva.admbio.dao;
 
-import java.util.List;
-import pe.com.bbva.admbio.model.DepuracionCliente;
+import pe.com.bbva.admbio.model.Cliente;
 
 /**
  *
  * @author max
  */
-public interface IDepuracionDAO extends IDAO<DepuracionCliente> {
+public interface IClienteDAO extends IDAO<Cliente> {
 
-    public List<Integer> totalClientesEliminar();
+    public int totalClientes();
+
     
-    public List<Integer> depurarClientes();
 }

@@ -47,6 +47,7 @@
                 <value>pe.com.bbva.admbio.model.Motivo</value>
                 <value>pe.com.bbva.admbio.model.ServidorOficina</value>
                 <value>pe.com.bbva.admbio.model.Terminal</value>
+                <value>pe.com.bbva.admbio.model.Cliente</value>
             </list>
         </property>
         <property name="hibernateProperties">

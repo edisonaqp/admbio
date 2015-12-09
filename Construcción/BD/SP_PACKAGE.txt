@@ -1,0 +1,7 @@
+create or replace
+PACKAGE          "PKG_GWYBIO" IS 
+
+  PROCEDURE SPD_DEPURAR_CLIENTE (
+        "RSPTA_C" OUT SYS_REFCURSOR);
+
+END "PKG_GWYBIO";

@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class DepuracionService implements Serializable, IDepuracionService {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Autowired
@@ -34,7 +34,7 @@ public class DepuracionService implements Serializable, IDepuracionService {
 
     private static final Logger LOGGER = Logger.getLogger(DepuracionService.class);
 
-     public List<DepuracionCliente> listarTodos() {
+    public List<DepuracionCliente> listarTodos() {
         List<DepuracionCliente> lista = new ArrayList<DepuracionCliente>();
         try {
             lista = depuracionDAO.buscar();
@@ -42,5 +42,13 @@ public class DepuracionService implements Serializable, IDepuracionService {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    public List<Integer> totalClientesEliminar() {
+        return depuracionDAO.totalClientesEliminar();
+    }
+
+    public List<Integer> depurarClientes() {
+        return depuracionDAO.depurarClientes();
     }
 }

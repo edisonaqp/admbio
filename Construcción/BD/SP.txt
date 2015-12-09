@@ -1,0 +1,14 @@
+-- obtiene el registro más reciente del cliente a eliminar
+select M.CO_TIPO_DOC_IDE, M.NU_DOC_CLIENT
+from IBTV_MOVIMIENTO M
+inner join (
+select CO_TIPO_DOC_IDE, NU_DOC_CLIENT, MAX(ID_TXN) ID_TXN
+from IBTV_MOVIMIENTO
+where CO_TIPO_NOTIFICACION = 3 AND FE_TXN >= TRUNC(SYSDATE)
+group by CO_TIPO_DOC_IDE, NU_DOC_CLIENT
+) M2 
+on M.id_txn = M2.id_txn;
+
+-- obtiene el registro a eliminar
+select e.cd_tipo_doc, e.nu_numero_documento from TBI004_ESTADO_CLI e
+where e.st_indicador_pdp='X' OR e.st_indicador_pdp='D'

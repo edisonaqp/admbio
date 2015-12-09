@@ -13,6 +13,11 @@ import java.util.List;
  * @author max
  */
 public interface IDepuracionService {
-  
-     public List<DepuracionCliente> listarTodos();
+
+    public List<DepuracionCliente> listarTodos();
+
+    public List<Integer> totalClientesEliminar();
+    
+    public List<Integer> depurarClientes();
+
 }

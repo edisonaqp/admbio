@@ -1,0 +1,34 @@
+create or replace
+PACKAGE BODY          "PKG_GWYBIO" IS
+
+PROCEDURE SPD_DEPURAR_CLIENTE (RSPTA_C OUT SYS_REFCURSOR) IS
+BEGIN
+DECLARE
+    CURSOR cliente_cursor IS
+    SELECT e.cd_tipo_doc AS TIPO, e.nu_numero_documento AS NUMERO FROM TBI004_ESTADO_CLI e
+    WHERE e.st_indicador_pdp='X' OR e.st_indicador_pdp='D'
+    UNION
+    SELECT M.CO_TIPO_DOC_IDE AS TIPO, M.NU_DOC_CLIENT AS NUMERO
+    FROM IBTV_MOVIMIENTO M
+    INNER JOIN (
+    SELECT CO_TIPO_DOC_IDE, NU_DOC_CLIENT, MAX(ID_TXN) ID_TXN
+    FROM IBTV_MOVIMIENTO
+    WHERE CO_TIPO_NOTIFICACION = 3 AND FE_TXN >= TRUNC(SYSDATE)
+    GROUP BY CO_TIPO_DOC_IDE, NU_DOC_CLIENT
+    ) M2 
+    on M.id_txn = M2.id_txn;
+
+BEGIN
+      FOR cliente IN cliente_cursor 
+      LOOP
+      DELETE FROM IBTM_CLIENTES
+      WHERE nu_doc_cliente=cliente.NUMERO
+      AND co_tipo_doc_ide= cliente.TIPO;
+     END LOOP;
+     EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+      DBMS_OUTPUT.PUT_LINE('NO EXISTE DATOS ');
+END;
+END SPD_DEPURAR_CLIENTE;
+
+END "PKG_GWYBIO";
